@@ -7,10 +7,20 @@ using namespace std;
 
 class Player : public Players{
     double cash = 500;
-    public:
+    bool insurance;
+    double bet;
+
+public:
     Player(string name);
 
+    double getCash();
+    void setCash(double money);
 
+    bool getInsurance();
+    void setInsurance(bool value);
+
+    double getBet();
+    void setBet(double money);
 };
 
 #endif //PLAYER_H

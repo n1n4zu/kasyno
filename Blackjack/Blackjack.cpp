@@ -71,14 +71,42 @@ void Blackjack::play() const {
         cout << endl;
 
         if (croupier.deck[0].value == "As") {
+            string option;
+
+            cout << "Karty gracza " << croupier.name << ":" << endl;
             cout << croupier.deck[0].value << " " << croupier.deck[0].color << endl;
             cout << "????? ??????" << endl;
             cout << "Punkty gracza " << croupier.name << ": ????" << endl;
+
+            cout << endl;
+
+            cout << "Ubezpieczyć? [tak/nie]" << endl << "> ";
+            cin >> option;
+
+            if (option == "tak") player.setInsurance(true);
+
+            sleep();
+
+            clear();
+
+            player.countPointsBlackjack();
+            player.displayDeck();
+
+            cout << endl;
+
+            croupier.countPointsBlackjack();
+            croupier.displayDeck();
+
+            if ((croupier.deck[1].value != "10"
+                || croupier.deck[1].value != "Walet"
+                || croupier.deck[1].value != "Dama"
+                || croupier.deck[1].value != "Król")
+                && player.getInsurance() == true) cout << endl << "Straciłeś ubezpieczenie!" << endl;
         } else {
             croupier.countPointsBlackjack();
             croupier.displayDeck();
         }
-        
+
         cout << endl;
 
         if (croupier.checkBlackjack(croupier) && croupier.checkBlackjack(player)) {
