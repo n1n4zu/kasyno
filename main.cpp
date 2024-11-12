@@ -1,8 +1,9 @@
-#include "Baccarat.h"
-#include "Croupier.h"
-#include "OneHandadBandit.h"
-#include "deck.h"
-#include "Player.h"
+#include "Baccarat/Baccarat.h"
+#include "Blackjack/Blackjack.h"
+#include "Players/Croupier.h"
+#include "OneHandadBandit/OneHandedBandit.h"
+#include "Players/Player.h"
+#include "Craps/Craps.h"
 
 using namespace std;
 
@@ -10,12 +11,18 @@ int main()
 {
     Croupier croupier("Krupier");
     Player player("Kryspin");
-    OneHandadBandit fruitMachine;
+    OneHandedBandit fruitMachine;
     Baccarat baccarat(player, croupier);
+    Craps craps;
+    Blackjack blackjack(player, croupier);
 
-    // cout << fruitMachine.play() << endl;
+    // fruitMachine.play();
 
-    baccarat.play();
+    // baccarat.play();
+
+    // craps.play();
+
+    blackjack.play();
 
     return 0;
 }
