@@ -43,10 +43,17 @@ void Croupier::whoWinsBaccarat(Croupier player1, Player player2) {
 }
 
 void Croupier::whoWinsBlackjack(Croupier croupier, Player player) {
-        if (player.points <= 21 && (player.points > croupier.points || croupier.points > 21)) cout << "Wygrał gracz " << player.name << endl;
-        else if (croupier.points <= 21 && (croupier.points > player.points || player.points > 21)) cout << "Wygrał gracz " << croupier.name << endl;
-        else if (croupier.points > 21 && player.points > 21) cout << "Nikt nie wygrał" << endl;
-        else if (croupier.points ==  player.points) cout << "Remis" << endl;
+        if (player.points <= 21 && (player.points > croupier.points || croupier.points > 21)) {
+            cout << "Wygrał gracz " << player.name << endl;
+            player.setCash(player.getCash() + player.getBet() * 2);
+        } else if (croupier.points <= 21 && (croupier.points > player.points || player.points > 21)) cout << "Wygrał gracz " << croupier.name << endl;
+        else if (croupier.points > 21 && player.points > 21) {
+            cout << "Nikt nie wygrał" << endl;
+            player.setCash(player.getCash() + player.getBet());
+        } else if (croupier.points ==  player.points) {
+            cout << "Remis" << endl;
+            player.setCash(player.getCash() + player.getBet());
+        }
 }
 
 bool Croupier::checkBlackjack(Players player) {

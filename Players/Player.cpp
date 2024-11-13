@@ -24,6 +24,14 @@ void Player::setInsurance(bool value) {
     this->insurance = value;
 }
 
+double Player::getInsuranceValue() {
+    return insuranceValue;
+}
+
+void Player::setInsuranceValue(double value) {
+    this->insuranceValue = value;
+}
+
 double Player::getBet() {
     return bet;
 }

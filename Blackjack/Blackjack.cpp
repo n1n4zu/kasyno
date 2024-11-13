@@ -83,7 +83,11 @@ void Blackjack::play() const {
             cout << "Ubezpieczyć? [tak/nie]" << endl << "> ";
             cin >> option;
 
-            if (option == "tak") player.setInsurance(true);
+            if (option == "tak") {
+                player.setInsurance(true);
+                player.setInsuranceValue(player.getBet() / 2);
+                player.setCash(player.getCash() - player.getInsuranceValue());
+            }
 
             sleep();
 
@@ -101,7 +105,10 @@ void Blackjack::play() const {
                 || croupier.deck[1].value != "Walet"
                 || croupier.deck[1].value != "Dama"
                 || croupier.deck[1].value != "Król")
-                && player.getInsurance() == true) cout << endl << "Straciłeś ubezpieczenie!" << endl;
+                && player.getInsurance()) {
+                cout << endl << "Straciłeś ubezpieczenie!" << endl;
+                player.setInsuranceValue(0);
+            }
         } else {
             croupier.countPointsBlackjack();
             croupier.displayDeck();
@@ -121,19 +128,45 @@ void Blackjack::play() const {
 
         if (croupier.checkBlackjack(player)) {
             cout << player.name << " ma Blackjack'a!" << endl;
+            player.setCash(player.getCash() + player.getBet() * 1.5);
             break;
         }
 
         while (true) {
-            cout << "Dobrać kartę? [hit/stand]" << endl << "> ";
-            cin >> option;
+            if (player.deck.size() == 2) {
+                cout << "Dobrać kartę? [hit/stand/double]" << endl << "> ";
+                cin >> option;
+            } else {
+                cout << "Dobrać kartę? [hit/stand]" << endl << "> ";
+                cin >> option;
+            }
 
             if (option == "hit") {
                 sleep();
                 croupier.addCard(deck, player);
-            }
-            else if (option == "stand") break;
-            else {
+            } else if (option == "stand") break;
+            else if (option == "double" && player.deck.size() == 2) {
+                player.setCash(player.getCash() - player.getBet());
+                player.setBet(player.getBet() * 2);
+
+                croupier.addCard(deck, player);
+
+                sleep();
+
+                clear();
+
+                player.countPointsBlackjack();
+                player.displayDeck();
+
+                cout << endl;
+
+                croupier.countPointsBlackjack();
+                croupier.displayDeck();
+
+                cout << endl;
+
+                break;
+            } else {
                 clear();
 
                 player.countPointsBlackjack();
@@ -148,7 +181,6 @@ void Blackjack::play() const {
 
                 continue;
             }
-
 
             clear();
 

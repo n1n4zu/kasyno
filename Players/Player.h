@@ -1,14 +1,14 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 #include "Players.h"
-#include <string>
 
 using namespace std;
 
 class Player : public Players{
     double cash = 500;
-    bool insurance;
-    double bet;
+    bool insurance = false;
+    double insuranceValue = 0;
+    double bet = 0;
 
 public:
     Player(string name);
@@ -19,8 +19,11 @@ public:
     bool getInsurance();
     void setInsurance(bool value);
 
+    double getInsuranceValue();
+    void setInsuranceValue(double value);
+
     double getBet();
     void setBet(double money);
 };
 
-#endif //PLAYER_H
+#endif

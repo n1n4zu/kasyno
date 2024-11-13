@@ -27,10 +27,10 @@ void Players::countPointsBaccarat() {
         else if (card.value == "7") points += 7;
         else if (card.value == "8") points += 8;
         else if (card.value == "9") points += 9;
-        else if (card.value == "10") points += 0;
-        else if (card.value == "Walet") points += 0;
-        else if (card.value == "Dama") points += 0;
-        else if (card.value == "Król") points += 0;
+        else if (card.value == "10"
+                || card.value == "Walet"
+                || card.value == "Dama"
+                || card.value == "Król") points += 0;
     }
 
     while (points > 9) {
@@ -52,10 +52,10 @@ void Players::countPointsBlackjack() {
         else if (card.value == "7") points += 7;
         else if (card.value == "8") points += 8;
         else if (card.value == "9") points += 9;
-        else if (card.value == "10") points += 10;
-        else if (card.value == "Walet") points += 10;
-        else if (card.value == "Dama") points += 10;
-        else if (card.value == "Król") points += 10;
+        else if (card.value == "10"
+                || card.value == "Walet"
+                || card.value == "Dama"
+                || card.value == "Król") points += 10;
         else if (card.value == "As") as++;
     }
 
