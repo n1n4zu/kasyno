@@ -124,55 +124,83 @@ void Croupier::checkTable(const vector<Card>& table) const {
         case 2:
             if (values[0] == values[1])
                 cout << "(Para)" << endl;
-            else cout << endl;
+            else cout << "(Wysoka karta)" << endl;
             break;
         case 3:
-            if (values[0] == values[1] == values[2])
+            if (values[0] == values[1] &&
+                values[0] == values[2])
                 cout << "(Trójka)" << endl;
             else if (values[0] == values[1])
                         cout << "(Para)" << endl;
-            else cout << endl;
+            else cout << "(Wysoka karta)" << endl;
             break;
         case 4:
-            if (values[0] == values[1] == values[2] == values[3])
+            if (values[0] == values[1] &&
+                values[0] == values[2] &&
+                values[0] == values[3])
                     cout << "(Kareta)" << endl;
-            else if (values[0] == values[1] == values[2])
+            else if (values[0] == values[1] &&
+                     values[0] == values[2])
                 cout << "(Trójka)" << endl;
             else if (values[0] == values[1] &&
                      values[2] == values[3])
                         cout << "(Dwie pary)" << endl;
             else if (values[0] == values[1])
                         cout << "(Para)" << endl;
-            else cout << endl;
+            else cout << "(Wysoka karta)" << endl;
             break;
         case 5:
-            if (colors[0] == colors[1] &&
-                colors[1] == colors[2] &&
-                colors[2] == colors[3] &&
-                colors[3] == colors[4] &&
+            if (colors[0] == colors[4] &&
                 values[0] + 1 == values[1] &&
                 values[1] + 1 == values[2] &&
                 values[2] + 1 == values[3] &&
                 values[3] + 1 == values[4] &&
                 values[4] == 14)
                     cout << "(Poker królewski) " << endl;
-            else if (colors[0] == colors[1] &&
-                     colors[1] == colors[2] &&
-                     colors[2] == colors[3] &&
-                     colors[3] == colors[4] &&
-                     values[0] + 1 == values[1] &&
+            else if (colors[0] == colors[4] &&
+                     ((values[0] + 1 == values[1] &&
                      values[1] + 1 == values[2] &&
                      values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4])
+                     values[3] + 1 == values[4]) ||
+                     (values[4] == 14 &&
+                     values[0] + 1 == values[1] &&
+                     values[1] + 1 == values[2] &&
+                     values[2] + 1 == values[3])))
                         cout << "(Poker)" << endl;
-            else if (values[0] == values[1] == values[2] == values[3])
+            else if (values[0] == values[1] &&
+                     values[0] == values[2] &&
+                     values[0] == values[3])
                         cout << "(Kareta)" << endl;
-            else if (values[0] == values[1] == values[2] &&
+            else if (values[0] == values[1] &&
+                     values[0] == values[2] &&
                      values[3] == values[4])
                         cout << "(Ful)" << endl;
+            else if (colors[0] == colors[4])
+                        cout << "(Kolor)" << endl;
+            else if (values[0] + 1 == values[1] &&
+                     values[1] + 1 == values[2] &&
+                     values[2] + 1 == values[3] &&
+                     values[3] + 1 == values[4] ||
+                     (values[4] == 14 &&
+                     values[0] + 1 == values[1] &&
+                     values[1] + 1 == values[2] &&
+                     values[2] + 1 == values[3]))
+                        cout << "(Strit)" << endl;
+            else if (values[0] == values[1] &&
+                     values[0] == values[2])
+                        cout << "(Trójka)" << endl;
+            else if (values[0] == values[1] &&
+                     values[2] == values[3])
+                        cout << "(Dwie pary)" << endl;
+            else if (values[0] == values[1])
+                cout << "(Para)" << endl;
+            else cout << "(Wysoka karta)" << endl;
             break;
         default:
-            cout << endl;
+            cout << "(Wysoka karta)" << endl;
             break;
     }
+
+    colors.clear();
+    values.clear();
 }

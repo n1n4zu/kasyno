@@ -24,17 +24,17 @@ void Poker::play() const {
     while (true) {
         // sleep();
 
-        croupier.putCardOnTable(deck, table, 8);
+        croupier.putCardOnTable(deck, table, 0);
         croupier.displayTable(table);
-//        sleep();
+        sleep();
         clear();
 
-        croupier.addCard(deck, player);
-        croupier.displayTable(table);
-        cout << endl;
-        player.displayHand();
+//        croupier.addCard(deck, player);
+//        croupier.displayTable(table);
+//        cout << endl;
+//        player.displayHand();
 //        sleep();
-        clear();
+//        clear();
 
 ////        croupier.addCard(deck, player2);
 //        croupier.displayTable(table);
@@ -45,19 +45,19 @@ void Poker::play() const {
 //        sleep();
 //        clear();
 
-        croupier.putCardOnTable(deck, table, 9);
+        croupier.putCardOnTable(deck, table, 50);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand();
-//        sleep();
+        sleep();
         clear();
 
-        croupier.addCard(deck, player);
-        croupier.displayTable(table);
-        cout << endl;
-        player.displayHand();
+//        croupier.addCard(deck, player);
+//        croupier.displayTable(table);
+//        cout << endl;
+//        player.displayHand();
 //        sleep();
-        clear();
+//        clear();
 
 ////        croupier.addCard(deck, player2);
 //        croupier.displayTable(table);
@@ -68,21 +68,21 @@ void Poker::play() const {
 //        sleep();
 //        clear();
 
-        croupier.putCardOnTable(deck, table, 10);
+        croupier.putCardOnTable(deck, table, 2);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand();
-//        sleep();
+        sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 11);
+        croupier.putCardOnTable(deck, table, 14);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand();
-//        sleep();
+        sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 12);
+        croupier.putCardOnTable(deck, table, 13);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand();
