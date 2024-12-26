@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../functions/functions.h"
 #include <string>
-
+#include <array>
 
 using namespace std;
 
@@ -19,7 +19,7 @@ void Blackjack::play() const {
         }
     }
 
-    while(true) {
+    while (true) {
         sleep();
 
         croupier.addCard(deck, player);

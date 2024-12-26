@@ -69,3 +69,10 @@ void Players::countPointsBlackjack() {
         } else if (points > 21) points += 1;
     }
 }
+
+void Players::displayHand() const {
+    cout << "Karty gracza " << name << ":" << endl;
+    for (const auto& card : deck) {
+        cout << card.value << " " << card.color << endl;
+    }
+}

@@ -2,6 +2,7 @@
 #define CROUPIER_H
 #include "../deck/deck.h"
 #include "Players.h"
+#include <vector>
 #include <set>
 #include "Player.h"
 
@@ -27,6 +28,15 @@ public:
 
     // Sprawdza, czy gracz ma Blackjack'a
     bool checkBlackjack(Players player);
+
+    // Daje kartę na stół w pokerze
+    void putCardOnTable(const array<Card, 52>& talia, vector<Card>& table, int licznik);
+
+    // Wyswietla karty stole
+    void displayTable(const vector<Card>& table) const;
+
+    // Sprawdza karty na stole
+    void checkTable(const vector<Card>& table) const;
 };
 
 #endif //CROUPIER_H

@@ -23,6 +23,9 @@ class Players {
     // Podlicza punkty kart w ręce gracza w grze Blackjack
     void countPointsBlackjack();
 
+    // Wyświetla karty w ręce gracza
+    void displayHand() const;
+
 };
 
 #endif //PLAYERS_H
