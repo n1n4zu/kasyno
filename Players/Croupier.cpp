@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "../functions/functions.h"
 #include <iostream>
+#include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -81,75 +83,94 @@ void Croupier::displayTable(const vector<Card>& table) const {
 }
 
 void Croupier::checkTable(const vector<Card>& table) const {
+    map<string, int> colorsDict;
+    colorsDict["Karo"] = 1;
+    colorsDict["Trefl"] = 2;
+    colorsDict["Pik"] = 3;
+    colorsDict["Kier"] = 4;
+
+    vector<int> colors;
+
+    for (int i = 0; i < table.size(); i++) {
+        colors.push_back(colorsDict[table[i].color]);
+    }
+
+    sort(colors.begin(), colors.end());
+
+    map<string, int> valuesDict;
+    valuesDict["2"] = 2;
+    valuesDict["3"] = 3;
+    valuesDict["4"] = 4;
+    valuesDict["5"] = 5;
+    valuesDict["6"] = 6;
+    valuesDict["7"] = 7;
+    valuesDict["8"] = 8;
+    valuesDict["9"] = 9;
+    valuesDict["10"] = 10;
+    valuesDict["Walet"] = 11;
+    valuesDict["Dama"] = 12;
+    valuesDict["Król"] = 13;
+    valuesDict["As"] = 14;
+
+    vector<int> values;
+
+    for (int i = 0; i < table.size(); i++) {
+        values.push_back(valuesDict[table[i].value]);
+    }
+
+    sort(values.begin(), values.end());
+
     switch (table.size()) {
         case 2:
-            if (table[0].value == table[1].value)
+            if (values[0] == values[1])
                 cout << "(Para)" << endl;
             else cout << endl;
             break;
         case 3:
-            if (table[0].value == table[1].value && table[1].value == table[2].value)
+            if (values[0] == values[1] == values[2])
                 cout << "(Trójka)" << endl;
-            else if (table[0].value == table[1].value ||
-                table[0].value == table[2].value ||
-                table[1].value == table[2].value)
-                    cout << "(Para)" << endl;
-        else cout << endl;
+            else if (values[0] == values[1])
+                        cout << "(Para)" << endl;
+            else cout << endl;
             break;
         case 4:
-            if (table[0].value == table[1].value && table[1].value == table[2].value ||
-                table[0].value == table[1].value && table[1].value == table[3]. value ||
-                table[0].value == table[2].value && table[2].value == table[3]. value)
-                    cout << "(Trójka)" << endl;
-            else if (table[0].value == table[1].value && table[2].value == table[3].value ||
-                     table[0].value == table[2].value && table[2].value == table[3].value)
+            if (values[0] == values[1] == values[2] == values[3])
+                    cout << "(Kareta)" << endl;
+            else if (values[0] == values[1] == values[2])
+                cout << "(Trójka)" << endl;
+            else if (values[0] == values[1] &&
+                     values[2] == values[3])
                         cout << "(Dwie pary)" << endl;
-            else if (table[0].value == table[1].value ||
-                     table[0].value == table[2].value ||
-                     table[0].value == table[3].value ||
-                     table[1].value == table[2].value ||
-                     table[1].value == table[3].value ||
-                     table[2].value == table[3].value)
+            else if (values[0] == values[1])
                         cout << "(Para)" << endl;
             else cout << endl;
             break;
         case 5:
-            if (table[0].color == table[1].color &&
-                table[1].color == table[2].color &&
-                table[2].color == table[3].color &&
-                table[3].color == table[4].color &&
-                (table[0].value == "10" ||
-                 table[1].value == "10" ||
-                 table[2].value == "10" ||
-                 table[3].value == "10" ||
-                 table[4].value == "10") &&
-                (table[0].value == "Walet" ||
-                 table[1].value == "Walet" ||
-                 table[2].value == "Walet" ||
-                 table[3].value == "Walet" ||
-                 table[4].value == "Walet") &&
-                (table[0].value == "Dama" ||
-                 table[1].value == "Dama" ||
-                 table[2].value == "Dama" ||
-                 table[3].value == "Dama" ||
-                 table[4].value == "Dama") &&
-                (table[0].value == "Król" ||
-                 table[1].value == "Król" ||
-                 table[2].value == "Król" ||
-                 table[3].value == "Król" ||
-                 table[4].value == "Król") &&
-                (table[0].value == "As" ||
-                 table[1].value == "As" ||
-                 table[2].value == "As" ||
-                 table[3].value == "As" ||
-                 table[4].value == "As"))
-                    cout << "(Poker królewski)" << endl;
-        else if (table[0].color == table[1].color &&
-                 table[1].color == table[2].color &&
-                 table[2].color == table[3].color &&
-                 table[3].color == table[4].color)
-                    cout << "Poker" << endl;
-        break;
+            if (colors[0] == colors[1] &&
+                colors[1] == colors[2] &&
+                colors[2] == colors[3] &&
+                colors[3] == colors[4] &&
+                values[0] + 1 == values[1] &&
+                values[1] + 1 == values[2] &&
+                values[2] + 1 == values[3] &&
+                values[3] + 1 == values[4] &&
+                values[4] == 14)
+                    cout << "(Poker królewski) " << endl;
+            else if (colors[0] == colors[1] &&
+                     colors[1] == colors[2] &&
+                     colors[2] == colors[3] &&
+                     colors[3] == colors[4] &&
+                     values[0] + 1 == values[1] &&
+                     values[1] + 1 == values[2] &&
+                     values[2] + 1 == values[3] &&
+                     values[3] + 1 == values[4])
+                        cout << "(Poker)" << endl;
+            else if (values[0] == values[1] == values[2] == values[3])
+                        cout << "(Kareta)" << endl;
+            else if (values[0] == values[1] == values[2] &&
+                     values[3] == values[4])
+                        cout << "(Ful)" << endl;
+            break;
         default:
             cout << endl;
             break;
