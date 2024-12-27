@@ -22,10 +22,10 @@ void Croupier::giveCards(const array<Card, 52>& talia, Players& player) {
     }
 }
 
-void Croupier::addCard(const array<Card, 52>& talia, Players& player) {
+void Croupier::addCard(const array<Card, 52>& talia, Players& player, int licznik) {
     int index = randomize(0, 51);
     if (usedIndexes.find(index) == usedIndexes.end()) {
-        player.deck.push_back(talia[index]); // Dodajemy losową kartę z `talia`
+        player.deck.push_back(talia[licznik]); // Dodajemy losową kartę z `talia`
         usedIndexes.insert(index);    // Dodajemy indeks do zbioru użytych
     }
 }
@@ -75,8 +75,8 @@ void Croupier::putCardOnTable(const array<Card, 52>& talia, vector<Card>& table,
 }
 
 void Croupier::displayTable(const vector<Card>& table) const {
-    cout << "Karty na stole: ";
-    checkTable(table);
+    cout << "Karty na stole:" << endl;
+    // checkTable(table);
     for (const auto& card : table) {
         cout << card.value << " " << card.color << endl;
     }
@@ -120,7 +120,7 @@ void Croupier::checkTable(const vector<Card>& table) const {
 
     sort(values.begin(), values.end());
 
-    switch (table.size()) {
+    switch (values.size()) {
         case 2:
             if (values[0] == values[1])
                 cout << "(Para)" << endl;

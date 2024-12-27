@@ -1,6 +1,8 @@
 #include "functions.h"
 #include <random>
 #include <cstdlib>
+#include <vector>
+#include <unordered_map>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -8,7 +10,9 @@
 #include <unistd.h>
 #endif
 
-int randomize(int start, int end) {
+using namespace std;
+
+int randomize(const int start, const int end) {
 
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -33,4 +37,52 @@ void sleep() {
     #else
         sleep(3);
     #endif
+}
+
+bool repeated(vector<int>& values, const int n) {
+    unordered_map<int, int> count;
+
+    for (int num : values) {
+        if (++count[num] == n) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool repeatedPairs(vector<int>& values, int n) {
+    unordered_map<int, int> count;
+
+    for (int num : values) {
+        ++count[num];
+    }
+
+    int pair_count = 0;
+
+    for (const auto& [key, value] : count) {
+        if (value == n) {
+            ++pair_count;
+        }
+    }
+
+    return pair_count == 2;
+}
+
+bool isFull(vector<int>& values) {
+    unordered_map<int, int> count;
+    const bool isThree = repeated(values, 3);
+
+    for (int num : values) {
+        ++count[num];
+    }
+
+    int counter = 0;
+
+    for (const auto& [key, value] : count) {
+        if (value == 2) ++counter;
+        else if (value == 3) ++counter;
+    }
+
+    return isThree && counter == 2;
 }

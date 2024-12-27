@@ -22,7 +22,7 @@ void Blackjack::play() const {
     while (true) {
         sleep();
 
-        croupier.addCard(deck, player);
+        croupier.addCard(deck, player, 0);
 
         player.countPointsBlackjack();
         player.displayDeck();
@@ -31,7 +31,7 @@ void Blackjack::play() const {
 
         sleep();
 
-        croupier.addCard(deck, croupier);
+        croupier.addCard(deck, croupier, 0);
 
         clear();
 
@@ -47,7 +47,7 @@ void Blackjack::play() const {
 
         clear();
 
-        croupier.addCard(deck, player);
+        croupier.addCard(deck, player, 0);
 
         player.countPointsBlackjack();
         player.displayDeck();
@@ -61,7 +61,7 @@ void Blackjack::play() const {
 
         sleep();
 
-        croupier.addCard(deck, croupier);
+        croupier.addCard(deck, croupier, 0);
 
         clear();
 
@@ -143,13 +143,13 @@ void Blackjack::play() const {
 
             if (option == "hit") {
                 sleep();
-                croupier.addCard(deck, player);
+                croupier.addCard(deck, player, 0);
             } else if (option == "stand") break;
             else if (option == "double" && player.deck.size() == 2) {
                 player.setCash(player.getCash() - player.getBet());
                 player.setBet(player.getBet() * 2);
 
-                croupier.addCard(deck, player);
+                croupier.addCard(deck, player, 0);
 
                 sleep();
 
@@ -199,7 +199,7 @@ void Blackjack::play() const {
 
         if (player.points <= 21) {
             while (croupier.points < 17) {
-                croupier.addCard(deck, croupier);
+                croupier.addCard(deck, croupier, 0);
 
                 sleep();
 

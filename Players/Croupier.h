@@ -18,7 +18,7 @@ public:
     void giveCards(const array<Card, 52>& talia, Players& player);
 
     // Dodaje kartę do ręki gracza
-    void addCard(const array<Card, 52>& talia, Players& player);
+    void addCard(const array<Card, 52>& talia, Players& player, int licznik);
 
     // Sprawdza kto wygrał partię bakarat
     void whoWinsBaccarat(Croupier player1, Player player2);

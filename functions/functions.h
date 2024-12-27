@@ -1,6 +1,10 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
 
+#include <vector>
+
+using namespace std;
+
 // Losowanie liczby całkowitej w podanym zakresie
 int randomize(int start, int end);
 
@@ -9,5 +13,14 @@ void clear();
 
 // Czekanie na ruch
 void sleep();
+
+// Sprawdza czy liczba występuje n razy
+bool repeated(vector<int>& values, int n);
+
+// Sprawdza czy występują pary
+bool repeatedPairs(vector<int>& values, int n);
+
+// Sprawdza czy jest ful
+bool isFull(vector<int>& values);
 
 #endif //FUNCTIONS_H

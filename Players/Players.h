@@ -12,7 +12,7 @@ class Players {
     string name;
     int points;
     vector<Card> deck;
-    Players(string name);
+    Players(const string& name);
 
     // Wyświetla karty w ręce gracza
     void displayDeck() const;
@@ -24,8 +24,10 @@ class Players {
     void countPointsBlackjack();
 
     // Wyświetla karty w ręce gracza
-    void displayHand() const;
+    void displayHand(const vector<Card>& table) const;
 
+    // Sprawdza karty w ręce i na stole
+    void checkCards(const vector<Card>& table) const;
 };
 
 #endif //PLAYERS_H
