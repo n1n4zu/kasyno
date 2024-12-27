@@ -4,8 +4,7 @@
 #include <algorithm>
 #include <map>
 #include <unordered_map>
-
-#include "../functions/functions.h"
+#include "../functions/poker.h"
 
 using namespace std;
 
@@ -133,26 +132,11 @@ void Players::checkCards(const vector<Card> &table) const {
             break;
         case 5:
             if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
-            else if (colors[0] == colors[4] &&
-                     ((values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4]) ||
-                     (values[4] == 14 &&
-                     values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3]))) cout << "(Poker)" << endl;
+            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
             else if (repeated(values, 4)) cout << "(Kareta)" << endl;
             else if (isFull(values)) cout << "(Ful)" << endl;
             else if (repeated(colors, 5)) cout << "(Kolor)" << endl;
-            else if (values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4] ||
-                     (values[4] == 14 &&
-                     values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3])) cout << "(Strit)" << endl;
+            else if (isStraight(values)) cout << "(Strit)" << endl;
             else if (repeated(values, 3)) cout << "(Trójka)" << endl;
             else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
             else if (repeated(values, 2)) cout << "(Para)" << endl;
@@ -160,26 +144,11 @@ void Players::checkCards(const vector<Card> &table) const {
             break;
         case 6:
             if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
-            else if (colors[0] == colors[4] &&
-                     ((values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4]) ||
-                     (values[4] == 14 &&
-                     values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3]))) cout << "(Poker)" << endl;
+            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
             else if (repeated(values, 4)) cout << "(Kareta)" << endl;
             else if (isFull(values)) cout << "(Ful)" << endl;
             else if (repeated(colors, 5)) cout << "(Kolor)" << endl;
-            else if (values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4] ||
-                     (values[4] == 14 &&
-                     values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3])) cout << "(Strit)" << endl;
+            else if (isStraight(values)) cout << "(Strit)" << endl;
             else if (repeated(values, 3)) cout << "(Trójka)" << endl;
             else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
             else if (repeated(values, 2)) cout << "(Para)" << endl;
@@ -187,15 +156,7 @@ void Players::checkCards(const vector<Card> &table) const {
             break;
         case 7:
             if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
-            else if (colors[0] == colors[4] &&
-                     ((values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4]) ||
-                     (values[4] == 14 &&
-                     values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3]))) cout << "(Poker)" << endl;
+            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
             else if (repeated(values, 4)) cout << "(Kareta)" << endl;
             else if (isFull(values)) cout << "(Ful)" << endl;
             else if (repeated(colors, 5)) cout << "(Kolor)" << endl;

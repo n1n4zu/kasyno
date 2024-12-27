@@ -24,31 +24,31 @@ void Poker::play() const {
     while (true) {
         // sleep();
 
-        croupier.addCard(deck, player, 13);
+        croupier.addCard(deck, player, 11);
         player.displayHand(table);
         sleep();
         clear();
 
-        croupier.addCard(deck, player, 1);
+        croupier.addCard(deck, player, 10);
         player.displayHand(table);
         sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 2);
+        croupier.putCardOnTable(deck, table, 9);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);
         sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 3);
+        croupier.putCardOnTable(deck, table, 8);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);
         sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 4);
+        croupier.putCardOnTable(deck, table, 7);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);
@@ -62,7 +62,7 @@ void Poker::play() const {
         sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 38);
+        croupier.putCardOnTable(deck, table, 39);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);

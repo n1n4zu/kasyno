@@ -2,6 +2,7 @@
 #include "Players.h"
 #include "Player.h"
 #include "../functions/functions.h"
+#include "../functions/poker.h"
 #include <iostream>
 #include <map>
 #include <algorithm>
@@ -34,13 +35,9 @@ void Croupier::whoWinsBaccarat(Croupier player1, Player player2) {
     if (9 - player1.points < 9 - player2.points) cout << "Wygrał gracz " << player1.name << endl;
     else if (9 - player1.points > 9 - player2.points) cout << "Wygrał gracz " << player2.name << endl;
     else if (9 - player1.points ==  9 - player2.points) {
-        if (player1.deck.size() == player2.deck.size()) {
-            cout << "Remis" << endl;
-        } else if (player1.deck.size() < player2.deck.size()) {
-            cout << "Wygrał gracz " << player1.name << endl;
-        } else {
-            cout << "Wygrał gracz " << player2.name << endl;
-        }
+        if (player1.deck.size() == player2.deck.size()) cout << "Remis" << endl;
+        else if (player1.deck.size() < player2.deck.size()) cout << "Wygrał gracz " << player1.name << endl;
+        else cout << "Wygrał gracz " << player2.name << endl;
     }
 }
 
@@ -76,10 +73,7 @@ void Croupier::putCardOnTable(const array<Card, 52>& talia, vector<Card>& table,
 
 void Croupier::displayTable(const vector<Card>& table) const {
     cout << "Karty na stole:" << endl;
-    // checkTable(table);
-    for (const auto& card : table) {
-        cout << card.value << " " << card.color << endl;
-    }
+    for (const auto& card : table) cout << card.value << " " << card.color << endl;
 }
 
 void Croupier::checkTable(const vector<Card>& table) const {
@@ -91,9 +85,7 @@ void Croupier::checkTable(const vector<Card>& table) const {
 
     vector<int> colors;
 
-    for (int i = 0; i < table.size(); i++) {
-        colors.push_back(colorsDict[table[i].color]);
-    }
+    for (int i = 0; i < table.size(); i++) colors.push_back(colorsDict[table[i].color]);
 
     sort(colors.begin(), colors.end());
 
@@ -114,88 +106,39 @@ void Croupier::checkTable(const vector<Card>& table) const {
 
     vector<int> values;
 
-    for (int i = 0; i < table.size(); i++) {
-        values.push_back(valuesDict[table[i].value]);
-    }
+    for (int i = 0; i < table.size(); i++) values.push_back(valuesDict[table[i].value]);
 
     sort(values.begin(), values.end());
 
     switch (values.size()) {
         case 2:
-            if (values[0] == values[1])
-                cout << "(Para)" << endl;
+            if (repeated(values, 2)) cout << "(Para)" << endl;
             else cout << "(Wysoka karta)" << endl;
-            break;
+        break;
         case 3:
-            if (values[0] == values[1] &&
-                values[0] == values[2])
-                cout << "(Trójka)" << endl;
-            else if (values[0] == values[1])
-                        cout << "(Para)" << endl;
+            if (repeated(values, 3)) cout << "(Trójka)" << endl;
+            else if (repeated(values, 2)) cout << "(Para)" << endl;
             else cout << "(Wysoka karta)" << endl;
-            break;
+        break;
         case 4:
-            if (values[0] == values[1] &&
-                values[0] == values[2] &&
-                values[0] == values[3])
-                    cout << "(Kareta)" << endl;
-            else if (values[0] == values[1] &&
-                     values[0] == values[2])
-                cout << "(Trójka)" << endl;
-            else if (values[0] == values[1] &&
-                     values[2] == values[3])
-                        cout << "(Dwie pary)" << endl;
-            else if (values[0] == values[1])
-                        cout << "(Para)" << endl;
+            if (repeated(values, 4)) cout << "(Kareta)" << endl;
+            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
+            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
+            else if (repeated(values, 2)) cout << "(Para)" << endl;
             else cout << "(Wysoka karta)" << endl;
-            break;
+        break;
         case 5:
-            if (colors[0] == colors[4] &&
-                values[0] + 1 == values[1] &&
-                values[1] + 1 == values[2] &&
-                values[2] + 1 == values[3] &&
-                values[3] + 1 == values[4] &&
-                values[4] == 14)
-                    cout << "(Poker królewski) " << endl;
-            else if (colors[0] == colors[4] &&
-                     ((values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4]) ||
-                     (values[4] == 14 &&
-                     values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3])))
-                        cout << "(Poker)" << endl;
-            else if (values[0] == values[1] &&
-                     values[0] == values[2] &&
-                     values[0] == values[3])
-                        cout << "(Kareta)" << endl;
-            else if (values[0] == values[1] &&
-                     values[0] == values[2] &&
-                     values[3] == values[4])
-                        cout << "(Ful)" << endl;
-            else if (colors[0] == colors[4])
-                        cout << "(Kolor)" << endl;
-            else if (values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3] &&
-                     values[3] + 1 == values[4] ||
-                     (values[4] == 14 &&
-                     values[0] + 1 == values[1] &&
-                     values[1] + 1 == values[2] &&
-                     values[2] + 1 == values[3]))
-                        cout << "(Strit)" << endl;
-            else if (values[0] == values[1] &&
-                     values[0] == values[2])
-                        cout << "(Trójka)" << endl;
-            else if (values[0] == values[1] &&
-                     values[2] == values[3])
-                        cout << "(Dwie pary)" << endl;
-            else if (values[0] == values[1])
-                cout << "(Para)" << endl;
+            if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
+            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
+            else if (repeated(values, 4)) cout << "(Kareta)" << endl;
+            else if (isFull(values)) cout << "(Ful)" << endl;
+            else if (repeated(colors, 5)) cout << "(Kolor)" << endl;
+            else if (isStraight(values)) cout << "(Strit)" << endl;
+            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
+            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
+            else if (repeated(values, 2)) cout << "(Para)" << endl;
             else cout << "(Wysoka karta)" << endl;
-            break;
+        break;
         default:
             cout << "(Wysoka karta)" << endl;
             break;
