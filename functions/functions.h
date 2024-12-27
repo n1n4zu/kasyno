@@ -23,4 +23,7 @@ bool repeatedPairs(vector<int>& values, int n);
 // Sprawdza czy jest ful
 bool isFull(vector<int>& values);
 
+// Sprawdza czy jest poker królewski
+bool isRoyalFlush(const vector<int>& values, vector<int>& colors);
+
 #endif //FUNCTIONS_H

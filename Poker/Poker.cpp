@@ -29,19 +29,19 @@ void Poker::play() const {
         sleep();
         clear();
 
-        croupier.addCard(deck, player, 25);
+        croupier.addCard(deck, player, 11);
         player.displayHand(table);
         sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 23);
+        croupier.putCardOnTable(deck, table, 10);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);
         sleep();
         clear();
 
-        croupier.putCardOnTable(deck, table, 10);
+        croupier.putCardOnTable(deck, table, 9);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);
