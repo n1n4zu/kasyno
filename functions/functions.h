@@ -26,4 +26,7 @@ bool isFull(vector<int>& values);
 // Sprawdza czy jest poker królewski
 bool isRoyalFlush(const vector<int>& values, vector<int>& colors);
 
+// Sprawdza czy jest strit
+bool isStraight(const vector<int>& values);
+
 #endif //FUNCTIONS_H

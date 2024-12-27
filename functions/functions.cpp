@@ -75,17 +75,26 @@ bool isFull(vector<int>& values) {
     return isThree && counter == 2;
 }
 
-bool isRoyalFlush(const vector<int> &values, vector<int> &colors) {
+bool isRoyalFlush(const vector<int>& values, vector<int>& colors) {
     const bool isColor = repeated(colors, 5);
 
-    for (int i = 1; i < values.size(); i++) {
+    for (int i = 1; i < values.size(); i++)
         if (values[i] + 1 == values[i + 1] &&
             values[i + 1] + 1 == values[i + 2] &&
             values[i + 2] + 1 == values[i + 3] &&
             values[i + 3] + 1 == values[i + 4] &&
             values[i + 4] == 14 &&
             isColor) return true;
-    }
+
+    return false;
+}
+
+bool isStraight(const vector<int>& values) {
+    for (int i = 1; i < values.size(); i++)
+        if (values[i] + 1 == values[i + 1] &&
+            values[i + 1] + 1 == values[i + 2] &&
+            values[i + 2] + 1 == values[i + 3] &&
+            values[i + 3] + 1 == values[i + 4]) return true;
 
     return false;
 }
