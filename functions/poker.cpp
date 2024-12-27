@@ -65,6 +65,6 @@ bool isStraight(const vector<int>& values) {
     return false;
 }
 
-bool isStraightFlush(const vector<int> &values, vector<int> &colors) {
+bool isStraightFlush(const vector<int>& values, vector<int> &colors) {
     return repeated(colors, 5) && isStraight(values);
 }

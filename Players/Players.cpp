@@ -3,7 +3,6 @@
 #include <iostream>
 #include <algorithm>
 #include <map>
-#include <unordered_map>
 #include "../functions/poker.h"
 
 using namespace std;
@@ -105,7 +104,6 @@ void Players::checkCards(const vector<Card> &table) const {
     valuesDict["As"] = 14;
 
     vector<int> values;
-    unordered_map<int, int> count;
 
     for (const auto & i : deck) values.push_back(valuesDict[i.value]);
 

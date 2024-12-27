@@ -12,7 +12,7 @@ class Croupier : public Players {
     int tableIndex = 0;
     set<int> usedIndexes;
 public:
-    Croupier(string name);
+    explicit Croupier(const string &name);
 
     // Daje na start 2 karty do ręki gracza
     void giveCards(const array<Card, 52>& talia, Players& player);
