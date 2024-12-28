@@ -27,7 +27,7 @@ void Baccarat::play() {
     croupier.countPointsBaccarat();
 
     // Krupier dobiera kartę
-    if (croupier.points < 5) croupier.addCard(deck, croupier, 0);
+    if (croupier.points < 5) croupier.addCard(deck, croupier);
 
     // Podliczanie punktów krupiera
     croupier.countPointsBaccarat();
@@ -50,10 +50,10 @@ void Baccarat::play() {
         cin >> option;
 
         // Dodanie karty graczowi
-        if (option == "t") croupier.addCard(deck, player, 0);
-        else if (option == "T") croupier.addCard(deck, player, 0);
-        else if (option == "tak") croupier.addCard(deck, player, 0);
-        else if (option == "Tak") croupier.addCard(deck, player, 0);
+        if (option == "t") croupier.addCard(deck, player);
+        else if (option == "T") croupier.addCard(deck, player);
+        else if (option == "tak") croupier.addCard(deck, player);
+        else if (option == "Tak") croupier.addCard(deck, player);
 
         clear();
 

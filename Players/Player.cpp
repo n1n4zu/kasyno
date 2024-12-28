@@ -29,13 +29,5 @@ double Player::getInsuranceValue() {
 }
 
 void Player::setInsuranceValue(double value) {
-    this->insuranceValue = value;
-}
-
-double Player::getBet() {
-    return bet;
-}
-
-void Player::setBet(double money) {
-    this->bet = money;
+    insuranceValue = value;
 }

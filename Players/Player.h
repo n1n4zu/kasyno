@@ -8,9 +8,13 @@ class Player : public Players{
     double cash = 500;
     bool insurance = false;
     double insuranceValue = 0;
+    bool isFold = false;
+    bool isCheck = false;
+    bool isAllIn = false;
+    double bet;
 
 public:
-    explicit Player(string name);
+    Player(string name);
 
     double getCash();
     void setCash(double money);
@@ -20,9 +24,6 @@ public:
 
     double getInsuranceValue();
     void setInsuranceValue(double value);
-
-    double getBet();
-    void setBet(double money);
 };
 
 #endif

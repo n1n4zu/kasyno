@@ -135,10 +135,10 @@ void Blackjack::play() const {
         while (true) {
             if (player.deck.size() == 2) {
                 cout << "Dobrać kartę? [hit/stand/double]" << endl << "> ";
-                cin.getline >> option;
+                cin >> option;
             } else {
                 cout << "Dobrać kartę? [hit/stand]" << endl << "> ";
-                cin.getline >> option;
+                cin >> option;
             }
 
             if (option == "hit") {

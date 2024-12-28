@@ -7,7 +7,11 @@
 
 using namespace std;
 
-Players::Players(const string&) : name(), points(0){}
+Players::Players(string name) : name(), points(0){}
+
+bool Players::operator==(const Players& other) const {
+    return name == other.name;
+}
 
 void Players::displayDeck() const {
     cout << "Karty gracza " << name << ":" << endl;
@@ -197,5 +201,10 @@ void Players::setAllIn(bool allIn) {
     isAllIn = allIn;
 }
 
+double Players::getBet() {
+    return bet;
+}
 
-
+void Players::setBet(double money) {
+    bet = money;
+}

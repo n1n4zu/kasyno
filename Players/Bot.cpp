@@ -71,12 +71,12 @@ string Bot::strategy(const vector<Card>& table) {
             number = randomize(1, 10000);
             if (isRoyalFlush(values, colors)) {
                 if (number % 6 == 0 && static_cast<int> (number * 2 * allInChance) % 10 == 0) {
-                    if (2 * allInChance > 1) return "All in";
+                    if (2 * allInChance > 1) return "All-in";
                     return "Raise";
                 }
             } else if (isStraightFlush(values, colors)) {
                 if (number % 6 == 0 && static_cast<int> (number * 1.5 * allInChance) % 10 == 0) {
-                    if (1.5 * allInChance > 1) return "All in";
+                    if (1.5 * allInChance > 1) return "All-in";
                     return "Raise";
                 }
             } else if (repeated(values, 4)) {
@@ -130,4 +130,6 @@ string Bot::strategy(const vector<Card>& table) {
                 return "Call";
         } else return "Fold";
     }
+
+    return "Fold";
 }

@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Croupier::Croupier(const string& name) : Players(name) {
+Croupier::Croupier(string name) : Players(name) {
     this->name = name;
 }
 

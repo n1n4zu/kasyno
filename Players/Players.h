@@ -17,7 +17,9 @@ public:
     string name;
     int points;
     vector<Card> deck;
-    Players(const string& name);
+    Players(string name);
+
+    bool operator==(const Players& other) const;
 
     // Wyświetla karty w ręce gracza
     void displayDeck() const;
@@ -51,6 +53,12 @@ public:
 
     // Ustawia czy gracz gra va banque
     void setAllIn(bool allIn);
+
+    // Pobiera wartość zakładu
+    double getBet();
+
+    // Ustawia wartość zakładu
+    void setBet(double money);
 };
 
 #endif //PLAYERS_H

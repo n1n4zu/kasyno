@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include "../Players/Bot.h"
+#include "../Players/Player.h"
 
 using namespace std;
 
@@ -23,66 +24,92 @@ void Poker::play() const {
         }
     }
 
-    vector<Players> line = {player, bob, john, tim};
+    vector<Players*> line = {&player, &bob, &john, &tim};
 
     for (int i = 0 ; i < 2; i++) {
-        for (auto & j : line) {
-            if (j.name == player.name) {
+        for (auto * j : line) {
+            cout << "Krupier daje kartę graczowi " << j->name << endl;
+            if (player.deck.size() > 0 && j->name != player.name) player.displayHand(table);
+            if (j->name == player.name) {
                 croupier.addCard(deck, player);
                 player.displayHand(table);
-                cout << "Krupier daje kartę graczowi " << j.name;
                 sleep();
                 clear();
+                continue;
             }
-            croupier.addCard(deck, j);
-            cout << "Krupier daje kartę graczowi " << j.name;
+            croupier.addCard(deck, *j);
             sleep();
             clear();
         }
     }
 
-    for (int i = 0; i < 2; i++) {
+    croupier.putCardOnTable(deck, table);
+    croupier.displayTable(table);
+    cout << endl;
+    player.displayHand(table);
+    sleep();
+    clear();
+
+    while (table.size() < 5) {
+        if (player.getFold()) break;
+
+        for (auto * i : line) {
+            if (i->getFold()) remove(line.begin(), line.end(), i);
+        }
+
         croupier.putCardOnTable(deck, table);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);
         sleep();
         clear();
-    }
 
-    while (table.size() <= 5) {
-        for (auto & i : line) {
-            if (i.getFold()) remove(line.begin(), line.end(), i);
-        }
-
-        for (auto & i : line) {
-            if (i.name == player.name) {
-                cin.getline >> option;
+        for (auto * i : line) {
+            if (i->getAllIn()) continue;
+            if (i->name == player.name) {
                 while (true) {
+                    clear();
+                    croupier.displayTable(table);
+                    cout << endl;
+                    player.displayHand(table);
+                    cout << "Podaj opcję:" << endl;
+                    cin >> option;
                     if (option == "Fold") {
-                        i.setFold(true);
-                        break;
-                    } else if (option == "Check") {
-                        i.setCheck(true);
+                        i->setFold(true);
                         break;
                     }
-                    else if (option == "Call") break;
-                    else if (option == "Bet") break;
-                    else if (option == "Raise") break;
-                    else if (option == "All in") {
-                        i.setAllIn(true);
+                    if (option == "Check") {
+                        i->setCheck(true);
                         break;
                     }
-                    else {
-                        clear();
-                        continue;
+                    if (option == "Call") break;
+                    if (option == "Bet") break;
+                    if (option == "Raise") break;
+                    if (option == "All-in") {
+                        i->setAllIn(true);
+                        break;
                     }
+                    clear();
                 }
                 continue;
             }
 
-            Bot* bot = static_cast<Bot*>(&i);
-            if (bot) bot->strategy(table);
+            Bot* bot = static_cast<Bot*>(i);
+            option = bot->strategy(table);
+            if (option == "Fold") i->setFold(true);
+            else if (option == "Check") i->setCheck(true);
+            else if (option == "Call") continue;
+            else if (option == "Bet") continue;
+            else if (option == "Raise") continue;
+            else if (option == "All-in") i->setAllIn(true);
         }
+
+        clear();
     }
+
+    croupier.displayTable(table);
+    cout << endl;
+    player.displayHand(table);
+
+    if (player.getFold()) cout << "Gracz " << player.name << " przegrał" << endl;
 }

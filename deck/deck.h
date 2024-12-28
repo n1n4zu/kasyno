@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <array>
 #include <iostream>
@@ -20,4 +21,4 @@ void displayCard(const Card& card);
 extern string colors[4];
 extern string values[13];
 
-#endif //DECK_H
+#endif
