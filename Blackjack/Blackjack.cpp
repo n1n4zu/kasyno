@@ -22,7 +22,7 @@ void Blackjack::play() const {
     while (true) {
         sleep();
 
-        croupier.addCard(deck, player, 0);
+        croupier.addCard(deck, player);
 
         player.countPointsBlackjack();
         player.displayDeck();
@@ -31,7 +31,7 @@ void Blackjack::play() const {
 
         sleep();
 
-        croupier.addCard(deck, croupier, 0);
+        croupier.addCard(deck, croupier);
 
         clear();
 
@@ -47,7 +47,7 @@ void Blackjack::play() const {
 
         clear();
 
-        croupier.addCard(deck, player, 0);
+        croupier.addCard(deck, player);
 
         player.countPointsBlackjack();
         player.displayDeck();
@@ -61,7 +61,7 @@ void Blackjack::play() const {
 
         sleep();
 
-        croupier.addCard(deck, croupier, 0);
+        croupier.addCard(deck, croupier);
 
         clear();
 
@@ -135,21 +135,21 @@ void Blackjack::play() const {
         while (true) {
             if (player.deck.size() == 2) {
                 cout << "Dobrać kartę? [hit/stand/double]" << endl << "> ";
-                cin >> option;
+                cin.getline >> option;
             } else {
                 cout << "Dobrać kartę? [hit/stand]" << endl << "> ";
-                cin >> option;
+                cin.getline >> option;
             }
 
             if (option == "hit") {
                 sleep();
-                croupier.addCard(deck, player, 0);
+                croupier.addCard(deck, player);
             } else if (option == "stand") break;
             else if (option == "double" && player.deck.size() == 2) {
                 player.setCash(player.getCash() - player.getBet());
                 player.setBet(player.getBet() * 2);
 
-                croupier.addCard(deck, player, 0);
+                croupier.addCard(deck, player);
 
                 sleep();
 
@@ -199,7 +199,7 @@ void Blackjack::play() const {
 
         if (player.points <= 21) {
             while (croupier.points < 17) {
-                croupier.addCard(deck, croupier, 0);
+                croupier.addCard(deck, croupier);
 
                 sleep();
 

@@ -8,10 +8,6 @@ class Player : public Players{
     double cash = 500;
     bool insurance = false;
     double insuranceValue = 0;
-    double bet = 0;
-    bool isFold = false;
-    bool isCheck = false;
-    bool isAllIn = false;
 
 public:
     explicit Player(string name);

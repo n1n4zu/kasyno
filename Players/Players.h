@@ -8,7 +8,12 @@
 using namespace std;
 
 class Players {
-    public:
+    double bet = 0;
+    bool isFold = false;
+    bool isCheck = false;
+    bool isAllIn = false;
+
+public:
     string name;
     int points;
     vector<Card> deck;
@@ -28,6 +33,24 @@ class Players {
 
     // Sprawdza karty w ręce i na stole
     void checkCards(const vector<Card>& table) const;
+
+    // Pobiera wartość czy gracz spasował
+    bool getFold() const;
+
+    // Pobiera wartość czy gracz czeka
+    bool getCheck() const;
+
+    // Pobiera wartość czy gracz gra va banque
+    bool getAllIn() const;
+
+    // Ustawia czy gracz spasował
+    void setFold(bool fold);
+
+    // Ustawia czy gracz czeka
+    void setCheck(bool check);
+
+    // Ustawia czy gracz gra va banque
+    void setAllIn(bool allIn);
 };
 
 #endif //PLAYERS_H

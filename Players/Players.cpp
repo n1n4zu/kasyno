@@ -172,3 +172,30 @@ void Players::checkCards(const vector<Card> &table) const {
     colors.clear();
     values.clear();
 }
+
+bool Players::getFold() const {
+    return isFold;
+}
+
+bool Players::getCheck() const {
+    return isCheck;
+}
+
+bool Players::getAllIn() const {
+    return isAllIn;
+}
+
+void Players::setFold(bool fold) {
+    isFold = fold;
+}
+
+void Players::setCheck(bool check) {
+    isCheck = check;
+}
+
+void Players::setAllIn(bool allIn) {
+    isAllIn = allIn;
+}
+
+
+
