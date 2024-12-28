@@ -18,7 +18,7 @@ public:
     void giveCards(const array<Card, 52>& talia, Players& player);
 
     // Dodaje kartę do ręki gracza
-    void addCard(const array<Card, 52>& talia, Players& player, int licznik);
+    void addCard(const array<Card, 52>& talia, Players& player);
 
     // Sprawdza kto wygrał partię bakarat
     void whoWinsBaccarat(Croupier player1, Player player2);
@@ -30,7 +30,7 @@ public:
     bool checkBlackjack(Players player);
 
     // Daje kartę na stół w pokerze
-    void putCardOnTable(const array<Card, 52>& talia, vector<Card>& table, int licznik);
+    void putCardOnTable(const array<Card, 52>& talia, vector<Card>& table);
 
     // Wyswietla karty stole
     void displayTable(const vector<Card>& table) const;

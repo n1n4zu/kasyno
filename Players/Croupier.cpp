@@ -23,10 +23,10 @@ void Croupier::giveCards(const array<Card, 52>& talia, Players& player) {
     }
 }
 
-void Croupier::addCard(const array<Card, 52>& talia, Players& player, int licznik) {
+void Croupier::addCard(const array<Card, 52>& talia, Players& player) {
     int index = randomize(0, 51);
     if (usedIndexes.find(index) == usedIndexes.end()) {
-        player.deck.push_back(talia[licznik]); // Dodajemy losową kartę z `talia`
+        player.deck.push_back(talia[index]); // Dodajemy losową kartę z `talia`
         usedIndexes.insert(index);    // Dodajemy indeks do zbioru użytych
     }
 }
@@ -60,11 +60,11 @@ bool Croupier::checkBlackjack(Players player) {
     return false;
 }
 
-void Croupier::putCardOnTable(const array<Card, 52>& talia, vector<Card>& table, int licznik) {
+void Croupier::putCardOnTable(const array<Card, 52>& talia, vector<Card>& table) {
     while (true) {
         int index = randomize(0, 51);
         if (usedIndexes.find(index) == usedIndexes.end()) {
-            table.push_back(talia[licznik]);
+            table.push_back(talia[index]);
             usedIndexes.insert(index);
             break;
         }

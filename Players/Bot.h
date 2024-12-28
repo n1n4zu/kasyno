@@ -1,6 +1,6 @@
 #ifndef BOT_H
 #define BOT_H
-#include "Player.h"
+#include "Players.h"
 #include "../deck/deck.h"
 #include <vector>
 
@@ -17,7 +17,10 @@ public:
     Bot(const string& name, double allInChance);
 
     // Sprawdza czy warto obstawiać
-    bool isWorth(const vector<Card>& table) const;
+    bool isWorth(vector<int>& values, vector<int>& colors) const;
+
+    // Strategia gry bota
+    string strategy(const vector<Card>& table);
 };
 
 #endif //BOT_H

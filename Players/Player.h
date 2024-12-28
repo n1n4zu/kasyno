@@ -14,7 +14,7 @@ class Player : public Players{
     bool isAllIn = false;
 
 public:
-    Player(string name);
+    explicit Player(string name);
 
     double getCash();
     void setCash(double money);

@@ -21,53 +21,26 @@ void Poker::play() const {
         }
     }
 
+    vector<Players> line = {player, bob, john, tim};
+
     while (true) {
         // sleep();
 
-        croupier.addCard(deck, player, 11);
-        player.displayHand(table);
-        sleep();
-        clear();
+        for (int i =0 ; i < 2; i++) {
+            croupier.addCard(deck, player);
+            player.displayHand(table);
+            sleep();
+            clear();
+        }
 
-        croupier.addCard(deck, player, 10);
-        player.displayHand(table);
-        sleep();
-        clear();
 
-        croupier.putCardOnTable(deck, table, 9);
+
+        croupier.putCardOnTable(deck, table);
         croupier.displayTable(table);
         cout << endl;
         player.displayHand(table);
         sleep();
         clear();
-
-        croupier.putCardOnTable(deck, table, 8);
-        croupier.displayTable(table);
-        cout << endl;
-        player.displayHand(table);
-        sleep();
-        clear();
-
-        croupier.putCardOnTable(deck, table, 7);
-        croupier.displayTable(table);
-        cout << endl;
-        player.displayHand(table);
-        sleep();
-        clear();
-
-        croupier.putCardOnTable(deck, table, 20);
-        croupier.displayTable(table);
-        cout << endl;
-        player.displayHand(table);
-        sleep();
-        clear();
-
-        croupier.putCardOnTable(deck, table, 39);
-        croupier.displayTable(table);
-        cout << endl;
-        player.displayHand(table);
-//        sleep();
-//        clear();
 
         break;
     }
