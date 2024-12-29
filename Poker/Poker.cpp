@@ -101,7 +101,7 @@ void Poker::play() const {
             }
 
             Bot* bot = static_cast<Bot*>(i);
-            option = bot->strategy(table);
+            option = bot->strategy(table, actual_bet);
             if (option == "Fold") i->setFold(true);
             else if (option == "Check") {
                 i->setCheck(true);

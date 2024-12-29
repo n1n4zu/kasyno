@@ -11,7 +11,7 @@ class Bot : public Players {
     bool isFold = false;
     bool isCheck = false;
     bool isAllIn = false;
-    double money = 500;
+    double money = 100;
 
 public:
     Bot(const string& name, double allInChance);
@@ -20,7 +20,7 @@ public:
     bool isWorth(vector<int>& values, vector<int>& colors) const;
 
     // Strategia gry bota
-    string strategy(const vector<Card>& table);
+    string strategy(const vector<Card>& table, int actual_bet);
 };
 
 #endif

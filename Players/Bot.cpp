@@ -26,7 +26,7 @@ bool Bot::isWorth(vector<int>& values, vector<int>& colors) const {
 }
 
 
-string Bot::strategy(const vector<Card>& table) {
+string Bot::strategy(const vector<Card>& table, int actual_bet) {
     map<string, int> colorsDict;
     colorsDict["Karo"] = 1;
     colorsDict["Trefl"] = 2;
