@@ -112,7 +112,7 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
                     if (number >= 9000) return "All-in";
                     return "Call";
                 }
-            } else if (number >= 5000 ) return "Call";
+            }
         }
     } else {
         for (int i = 0; i < 10; i++) {
@@ -142,7 +142,7 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
             } else if (repeated(values, 2)) {
                 if (number % 2 == 0 && static_cast<int>(number * 0.1 * allInChance) % 5 == 0)
                     return "Call";
-            } else if (number >= 5000 ) return "Call";
+            }
         }
     }
 
