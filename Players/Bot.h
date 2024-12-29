@@ -23,4 +23,4 @@ public:
     string strategy(const vector<Card>& table);
 };
 
-#endif //BOT_H
+#endif
