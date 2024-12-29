@@ -18,7 +18,7 @@ bool repeatedPairs(vector<int>& values, int n) {
 
     for (const auto& [key, value] : count) if (value == n) ++pair_count;
 
-    return pair_count == 2;
+    return pair_count >= 2;
 }
 
 bool isFull(vector<int>& values) {

@@ -55,7 +55,12 @@ void Poker::play() const {
     while (table.size() < 5) {
         if (player.getFold()) break;
 
-        for (auto * i : line) if (i->getFold()) remove(line.begin(), line.end(), i);
+        line.erase(remove_if(line.begin(), line.end(), [](Players* player) {
+            return player->getFold();
+        }), line.end());
+
+
+        if (line.size() == 1) break;
 
         for (auto * i : line) i->setCheck(false);
         check_line.clear();
@@ -69,17 +74,27 @@ void Poker::play() const {
 
         if (table.size() > 2) rotate(line.rbegin(), line.rbegin() + 1, line.rend());
 
+        cout << "Gracze: ";
+        for (auto * i : line) cout << i->name << " ";
+        cout << endl;
+
         for (auto * i : line) {
             if (i->getAllIn()) continue;
-            cout << "Teraz gra gracz " << i->name << endl;
-            sleep();
+            clear();
+            if (i->name != player.name) cout << "Teraz gra gracz " << i->name << endl;
+            if (i->name != player.name) {
+                croupier.displayTable(table);
+                cout << endl;
+                player.displayHand(table);
+                sleep();
+            }
             if (i->name == player.name) {
                 while (true) {
-                    clear();
+                    cout << "Teraz gra gracz " << i->name << endl;
                     croupier.displayTable(table);
                     cout << endl;
                     player.displayHand(table);
-                    cout << "Podaj opcję [Fold/Check/Call/Raise/Bet/All-in]:" << endl;
+                    cout << "Podaj opcję [Fold/Check/Call/Raise/Bet/All-in]:" << endl << "> ";
                     cin >> option;
                     if (option == "Fold") {
                         i->setFold(true);
@@ -102,28 +117,40 @@ void Poker::play() const {
 
             Bot* bot = static_cast<Bot*>(i);
             option = bot->strategy(table, actual_bet);
-            if (option == "Fold") i->setFold(true);
-            else if (option == "Check") {
+            if (option == "Fold") {
+                i->setFold(true);
+                cout << endl << "Gracz " << i->name << " spasował" << endl;
+                sleep();
+            } else if (option == "Check") {
                 i->setCheck(true);
                 check_line.push_back(i);
             } else if (option == "Call") continue;
             else if (option == "Bet") continue;
             else if (option == "Raise") continue;
-            else if (option == "All-in") i->setAllIn(true);
+            else if (option == "All-in") {
+                i->setAllIn(true);
+                cout << endl << "Gracz " << i->name << " spasował" << endl;
+            }
         }
 
         if (!check_line.empty()) {
             for (auto * i : check_line) {
                 if (i->getAllIn()) continue;
-                cout << "Teraz gra gracz " << i->name << endl;
-                sleep();
+                clear();
+                if (i->name != player.name) cout << "Teraz gra gracz " << i->name << endl;
+                if (i->name != player.name) {
+                    croupier.displayTable(table);
+                    cout << endl;
+                    player.displayHand(table);
+                    sleep();
+                }
                 if (i->name == player.name) {
                     while (true) {
-                        clear();
+                        cout << "Teraz gra gracz " << i->name << endl;
                         croupier.displayTable(table);
                         cout << endl;
                         player.displayHand(table);
-                        cout << "Podaj opcję [Fold/Call/Raise/Bet/All-in]:" << endl;
+                        cout << "Podaj opcję [Fold/Call/Raise/Bet/All-in]:" << endl << "> ";
                         cin >> option;
                         if (option == "Fold") {
                             i->setFold(true);
@@ -141,12 +168,18 @@ void Poker::play() const {
                 }
 
                 Bot* bot = static_cast<Bot*>(i);
-                option = bot->strategy(table);
-                if (option == "Fold") i->setFold(true);
-                else if (option == "Call") continue;
+                option = bot->strategy(table, actual_bet);
+                if (option == "Fold") {
+                    i->setFold(true);
+                    cout << endl << "Gracz " << i->name << " spasował" << endl;
+                    sleep();
+                } else if (option == "Call") continue;
                 else if (option == "Bet") continue;
                 else if (option == "Raise") continue;
-                else if (option == "All-in") i->setAllIn(true);
+                else if (option == "All-in") {
+                    i->setAllIn(true);
+                    cout << endl << "Gracz " << i->name << " gra va banque" << endl;
+                }
             }
         }
 
@@ -156,6 +189,12 @@ void Poker::play() const {
     croupier.displayTable(table);
     cout << endl;
     player.displayHand(table);
+    cout << endl;
 
     if (player.getFold()) cout << "Gracz " << player.name << " przegrał" << endl;
+    if (line.size() == 1) cout << "Wygrał gracz " << player.name << endl;
+
+    cout << "Gracze: ";
+    for (auto * i : line) cout << i->name << " ";
+    cout << endl;
 }

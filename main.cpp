@@ -13,8 +13,8 @@ int main()
 {
     Croupier croupier("Krupier");
     Player player("Kryspin");
-    Bot bob("Bob", 0.05);
-    Bot john("John", 0.15);
+    Bot bob("Bob", 0.25);
+    Bot john("John", 0.5);
     Bot tim("Tim", 0.8);
     OneHandedBandit fruitMachine;
     Baccarat baccarat(player, croupier);

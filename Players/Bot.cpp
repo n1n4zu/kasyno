@@ -64,71 +64,86 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
 
     sort(values.begin(), values.end());
 
-    int number = randomize(1, 10000);
-
     if (isWorth(values, colors)) {
-        for (int i = 0; i < 10; i++) {
-            number = randomize(1, 10000);
+        for (int i = 0; i < 100; i++) {
+            int number = randomize(1, 10000);
             if (isRoyalFlush(values, colors)) {
-                if (number % 6 == 0 && static_cast<int> (number * 2 * allInChance) % 10 == 0) {
-                    if (2 * allInChance > 1) return "All-in";
+                if (number % 2 == 0 && static_cast<int>(number * 5 * allInChance) % 5 == 0) {
+                    if (2.5 * allInChance > 1) return "All-in";
                     return "Raise";
                 }
             } else if (isStraightFlush(values, colors)) {
-                if (number % 6 == 0 && static_cast<int> (number * 1.5 * allInChance) % 10 == 0) {
-                    if (1.5 * allInChance > 1) return "All-in";
+                if (number % 2 == 0 && static_cast<int>(number * 4 * allInChance) % 5 == 0) {
+                    if (2.0 * allInChance > 1) return "All-in";
                     return "Raise";
                 }
             } else if (repeated(values, 4)) {
-                if (number % 6 == 0 && static_cast<int> (number * allInChance) % 10 == 0)
+                if (number % 2 == 0 && static_cast<int>(number * 3 * allInChance) % 5 == 0) {
+                    if (number >= 9000) return "All-in";
                     return "Call";
+                }
             } else if (isFull(values)) {
-                if (number % 6 == 0 && static_cast<int> (number * 0.75 * allInChance) % 10 == 0)
+                if (number % 2 == 0 && static_cast<int>(number * 2.5 * allInChance) % 5 == 0) {
+                    if (number >= 9000) return "All-in";
                     return "Call";
+                }
             } else if (repeated(colors, 5)) {
-                if (number % 6 == 0 && static_cast<int> (number * 0.5 * allInChance) % 10 == 0)
+                if (number % 2 == 0 && static_cast<int>(number * 2 * allInChance) % 5 == 0) {
+                    if (number >= 9000) return "All-in";
                     return "Call";
+                }
             } else if (isStraight(values)) {
-                if (number % 6 == 0 && static_cast<int> (number * 0.25 * allInChance) % 10 == 0)
+                if (number % 2 == 0 && static_cast<int>(number * 1.5 * allInChance) % 5 == 0) {
+                    if (number >= 9000) return "All-in";
                     return "Call";
+                }
             } else if (repeated(values, 3)) {
-                if (number % 6 == 0 && static_cast<int> (number * 0.15 * allInChance) % 10 == 0)
+                if (number % 2 == 0 && static_cast<int>(number * 1.25 * allInChance) % 5 == 0) {
+                    if (number >= 9000) return "All-in";
                     return "Call";
+                }
             } else if (repeatedPairs(values, 2)) {
-                if (number % 6 == 0 && static_cast<int> (number * 0.10 * allInChance) % 10 == 0)
+                if (number % 2 == 0 && static_cast<int>(number * 1.1 * allInChance) % 5 == 0) {
+                    if (number >= 9000) return "All-in";
                     return "Call";
+                }
             } else if (repeated(values, 2)) {
-                if (number % 6 == 0 && static_cast<int> (number * 0.05 * allInChance) % 10 == 0)
+                if (number % 2 == 0 && static_cast<int>(number * 1.05 * allInChance) % 5 == 0) {
+                    if (number >= 9000) return "All-in";
                     return "Call";
-            } else return "Fold";
+                }
+            } else if (number >= 5000 ) return "Call";
         }
     } else {
-        if (isRoyalFlush(values, colors)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0) return "Raise";
-        } else if (isStraightFlush(values, colors)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0) return "Raise";
-        } else if (repeated(values, 4)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0)
-                return "Call";
-        } else if (isFull(values)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0)
-                return "Call";
-        } else if (repeated(colors, 5)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0)
-                return "Call";
-        } else if (isStraight(values)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0)
-                return "Call";
-        } else if (repeated(values, 3)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0)
-                return "Call";
-        } else if (repeatedPairs(values, 2)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0)
-                return "Call";
-        } else if (repeated(values, 2)) {
-            if (number % 6 == 0 && static_cast<int> (number * 0.01 * allInChance) % 10 == 0)
-                return "Call";
-        } else return "Fold";
+        for (int i = 0; i < 10; i++) {
+            int number = randomize(1, 10000);
+            if (isRoyalFlush(values, colors)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Raise";
+            } else if (isStraightFlush(values, colors)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Raise";
+            } else if (repeated(values, 4)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.4 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (isFull(values)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.35 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (repeated(colors, 5)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.3 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (isStraight(values)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.25 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (repeated(values, 3)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.2 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (repeatedPairs(values, 2)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.15 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (repeated(values, 2)) {
+                if (number % 2 == 0 && static_cast<int>(number * 0.1 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (number >= 5000 ) return "Call";
+        }
     }
 
     return "Fold";
