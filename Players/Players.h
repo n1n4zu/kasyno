@@ -34,7 +34,7 @@ public:
     void displayHand(const vector<Card>& table) const;
 
     // Sprawdza karty w ręce i na stole
-    void checkCards(const vector<Card>& table) const;
+    string checkCards(const vector<Card>& table) const;
 
     // Pobiera wartość czy gracz spasował
     bool getFold() const;

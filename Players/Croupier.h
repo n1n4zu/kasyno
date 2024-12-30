@@ -35,8 +35,8 @@ public:
     // Wyswietla karty stole
     void displayTable(const vector<Card>& table) const;
 
-    // Sprawdza karty na stole
-    void checkTable(const vector<Card>& table) const;
+    // Sprawdza kto wygrał
+    void whoWinsPoker(vector<Players*> line, vector<Card>& table);
 };
 
 #endif //CROUPIER_H

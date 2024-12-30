@@ -76,74 +76,59 @@ void Croupier::displayTable(const vector<Card>& table) const {
     for (const auto& card : table) cout << card.value << " " << card.color << endl;
 }
 
-void Croupier::checkTable(const vector<Card>& table) const {
-    map<string, int> colorsDict;
-    colorsDict["Karo"] = 1;
-    colorsDict["Trefl"] = 2;
-    colorsDict["Pik"] = 3;
-    colorsDict["Kier"] = 4;
+void Croupier::whoWinsPoker(vector<Players*> line, vector<Card>& table) {
+    string winner;
 
-    vector<int> colors;
+    map<string, int> suitsDict;
+    suitsDict["Wysoka karta"] = 1;
+    suitsDict["Para"] = 2;
+    suitsDict["Dwie pary"] = 3;
+    suitsDict["Trójka"] = 4;
+    suitsDict["Strit"] = 5;
+    suitsDict["Kolor"] = 6;
+    suitsDict["Ful"] = 7;
+    suitsDict["Kareta"] = 8;
+    suitsDict["Poker"] = 9;
+    suitsDict["Poker królewski"] = 10;
 
-    for (int i = 0; i < table.size(); i++) colors.push_back(colorsDict[table[i].color]);
+    map<string, int> playersDict;
 
-    sort(colors.begin(), colors.end());
+    for (auto * i : line) {
+        map<string, int> colorsDict;
+        colorsDict["Karo"] = 1;
+        colorsDict["Trefl"] = 2;
+        colorsDict["Pik"] = 3;
+        colorsDict["Kier"] = 4;
 
-    map<string, int> valuesDict;
-    valuesDict["2"] = 2;
-    valuesDict["3"] = 3;
-    valuesDict["4"] = 4;
-    valuesDict["5"] = 5;
-    valuesDict["6"] = 6;
-    valuesDict["7"] = 7;
-    valuesDict["8"] = 8;
-    valuesDict["9"] = 9;
-    valuesDict["10"] = 10;
-    valuesDict["Walet"] = 11;
-    valuesDict["Dama"] = 12;
-    valuesDict["Król"] = 13;
-    valuesDict["As"] = 14;
+        vector<int> colors;
 
-    vector<int> values;
+        for (const auto & j : i->deck) colors.push_back(colorsDict[j.color]);
 
-    for (int i = 0; i < table.size(); i++) values.push_back(valuesDict[table[i].value]);
+        sort(colors.begin(), colors.end());
 
-    sort(values.begin(), values.end());
+        map<string, int> valuesDict;
+        valuesDict["2"] = 2;
+        valuesDict["3"] = 3;
+        valuesDict["4"] = 4;
+        valuesDict["5"] = 5;
+        valuesDict["6"] = 6;
+        valuesDict["7"] = 7;
+        valuesDict["8"] = 8;
+        valuesDict["9"] = 9;
+        valuesDict["10"] = 10;
+        valuesDict["Walet"] = 11;
+        valuesDict["Dama"] = 12;
+        valuesDict["Król"] = 13;
+        valuesDict["As"] = 14;
 
-    switch (values.size()) {
-        case 2:
-            if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-        break;
-        case 3:
-            if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-        break;
-        case 4:
-            if (repeated(values, 4)) cout << "(Kareta)" << endl;
-            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-        break;
-        case 5:
-            if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
-            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
-            else if (repeated(values, 4)) cout << "(Kareta)" << endl;
-            else if (isFull(values)) cout << "(Ful)" << endl;
-            else if (repeated(colors, 5)) cout << "(Kolor)" << endl;
-            else if (isStraight(values)) cout << "(Strit)" << endl;
-            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-        break;
-        default:
-            cout << "(Wysoka karta)" << endl;
-            break;
+        vector<int> values;
+
+        for (const auto & j : i->deck) values.push_back(valuesDict[j.color]);
+
+        sort(values.begin(), values.end());
+
+        playersDict[i->name] = suitsDict[i->checkCards(table)];
     }
 
-    colors.clear();
-    values.clear();
+
 }

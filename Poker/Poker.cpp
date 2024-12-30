@@ -194,7 +194,5 @@ void Poker::play() const {
     if (player.getFold()) cout << "Gracz " << player.name << " przegrał" << endl;
     if (line.size() == 1) cout << "Wygrał gracz " << player.name << endl;
 
-    cout << "Gracze: ";
-    for (auto * i : line) cout << i->name << " ";
-    cout << endl;
+    croupier.whoWinsPoker(line, table);
 }

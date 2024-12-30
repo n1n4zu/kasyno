@@ -72,12 +72,11 @@ void Players::countPointsBlackjack() {
 }
 
 void Players::displayHand(const vector<Card>& table) const {
-    cout << "Karty gracza " << name << ": ";
-    checkCards(table);
+    cout << "Karty gracza " << name << ": (" << checkCards(table) << ")" << endl;
     for (const auto& card : deck) cout << card.value << " " << card.color << endl;
 }
 
-void Players::checkCards(const vector<Card> &table) const {
+string Players::checkCards(const vector<Card> &table) const {
     map<string, int> colorsDict;
     colorsDict["Karo"] = 1;
     colorsDict["Trefl"] = 2;
@@ -117,64 +116,57 @@ void Players::checkCards(const vector<Card> &table) const {
 
     switch (values.size()) {
         case 2:
-            if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-            break;
+            return repeated(values, 2) ? "Para" : "Wysoka karta";
         case 3:
-            if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-            break;
+            if (repeated(values, 3)) return "Trójka";
+            if (repeated(values, 2)) return "Para";
+            return  "Wysoka karta";
         case 4:
-            if (repeated(values, 4)) cout << "(Kareta)" << endl;
-            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-            break;
+            if (repeated(values, 4)) return "Kareta";
+            if (repeated(values, 3)) return "Trójka";
+            if (repeatedPairs(values, 2)) return "Dwie pary";
+            if (repeated(values, 2)) return "Para";
+            return "Wysoka karta";
         case 5:
-            if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
-            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
-            else if (repeated(values, 4)) cout << "(Kareta)" << endl;
-            else if (isFull(values)) cout << "(Ful)" << endl;
-            else if (repeated(colors, 5)) cout << "(Kolor)" << endl;
-            else if (isStraight(values)) cout << "(Strit)" << endl;
-            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-            break;
+            if (isRoyalFlush(values, colors)) return "Poker królewski";
+            if (isStraightFlush(values, colors)) return "Poker";
+            if (repeated(values, 4)) return "Kareta";
+            if (isFull(values)) return "Ful";
+            if (repeated(colors, 5)) return "Kolor";
+            if (isStraight(values)) return "Strit";
+            if (repeated(values, 3)) return "Trójka";
+            if (repeatedPairs(values, 2)) return "Dwie pary";
+            if (repeated(values, 2)) return "Para";
+            return "Wysoka karta";
         case 6:
-            if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
-            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
-            else if (repeated(values, 4)) cout << "(Kareta)" << endl;
-            else if (isFull(values)) cout << "(Ful)" << endl;
-            else if (repeated(colors, 5)) cout << "(Kolor)" << endl;
-            else if (isStraight(values)) cout << "(Strit)" << endl;
-            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-            break;
+            if (isRoyalFlush(values, colors)) return "Poker królewski";
+            if (isStraightFlush(values, colors)) return "Poker";
+            if (repeated(values, 4)) return "Kareta";
+            if (isFull(values)) return "Ful";
+            if (repeated(colors, 5)) return "Kolor";
+            if (isStraight(values)) return "Strit";
+            if (repeated(values, 3)) return "Trójka";
+            if (repeatedPairs(values, 2)) return "Dwie pary";
+            if (repeated(values, 2)) return "Para";
+            return "Wysoka karta";
         case 7:
-            if (isRoyalFlush(values, colors)) cout << "(Poker królewski) " << endl;
-            else if (isStraightFlush(values, colors)) cout << "(Poker)" << endl;
-            else if (repeated(values, 4)) cout << "(Kareta)" << endl;
-            else if (isFull(values)) cout << "(Ful)" << endl;
-            else if (repeated(colors, 5)) cout << "(Kolor)" << endl;
-            else if (isStraight(values)) cout << "(Strit)" << endl;
-            else if (repeated(values, 3)) cout << "(Trójka)" << endl;
-            else if (repeatedPairs(values, 2)) cout << "(Dwie pary)" << endl;
-            else if (repeated(values, 2)) cout << "(Para)" << endl;
-            else cout << "(Wysoka karta)" << endl;
-            break;
+            if (isRoyalFlush(values, colors)) return "Poker królewski";
+            if (isStraightFlush(values, colors)) return "Poker";
+            if (repeated(values, 4)) return "Kareta";
+            if (isFull(values)) return "Ful";
+            if (repeated(colors, 5)) return "Kolor";
+            if (isStraight(values)) return "Strit";
+            if (repeated(values, 3)) return "Trójka";
+            if (repeatedPairs(values, 2)) return "Dwie pary";
+            if (repeated(values, 2)) return "Para";
+            return "Wysoka karta";
         default:
-            cout << "(Wysoka karta)" << endl;
-            break;
+            return "Wysoka karta";
     }
 
     colors.clear();
     values.clear();
+    return "Wysoka karta";
 }
 
 bool Players::getFold() const {
