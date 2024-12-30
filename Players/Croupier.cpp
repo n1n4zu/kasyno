@@ -78,57 +78,17 @@ void Croupier::displayTable(const vector<Card>& table) const {
 
 void Croupier::whoWinsPoker(vector<Players*> line, vector<Card>& table) {
     string winner;
+    int bestHand = 0;
 
-    map<string, int> suitsDict;
-    suitsDict["Wysoka karta"] = 1;
-    suitsDict["Para"] = 2;
-    suitsDict["Dwie pary"] = 3;
-    suitsDict["Trójka"] = 4;
-    suitsDict["Strit"] = 5;
-    suitsDict["Kolor"] = 6;
-    suitsDict["Ful"] = 7;
-    suitsDict["Kareta"] = 8;
-    suitsDict["Poker"] = 9;
-    suitsDict["Poker królewski"] = 10;
+    for (auto * player : line) {
+        string hand = player->checkCards(table);
+        int handValue = getHandValue(hand, player->deck);
 
-    map<string, int> playersDict;
-
-    for (auto * i : line) {
-        map<string, int> colorsDict;
-        colorsDict["Karo"] = 1;
-        colorsDict["Trefl"] = 2;
-        colorsDict["Pik"] = 3;
-        colorsDict["Kier"] = 4;
-
-        vector<int> colors;
-
-        for (const auto & j : i->deck) colors.push_back(colorsDict[j.color]);
-
-        sort(colors.begin(), colors.end());
-
-        map<string, int> valuesDict;
-        valuesDict["2"] = 2;
-        valuesDict["3"] = 3;
-        valuesDict["4"] = 4;
-        valuesDict["5"] = 5;
-        valuesDict["6"] = 6;
-        valuesDict["7"] = 7;
-        valuesDict["8"] = 8;
-        valuesDict["9"] = 9;
-        valuesDict["10"] = 10;
-        valuesDict["Walet"] = 11;
-        valuesDict["Dama"] = 12;
-        valuesDict["Król"] = 13;
-        valuesDict["As"] = 14;
-
-        vector<int> values;
-
-        for (const auto & j : i->deck) values.push_back(valuesDict[j.color]);
-
-        sort(values.begin(), values.end());
-
-        playersDict[i->name] = suitsDict[i->checkCards(table)];
+        if (handValue > bestHand) {
+            bestHand = handValue;
+            winner = player->name;
+        }
     }
 
-
+    cout << "Wygrał gracz " << winner << endl;
 }

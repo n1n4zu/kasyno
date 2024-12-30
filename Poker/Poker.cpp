@@ -94,7 +94,7 @@ void Poker::play() const {
                     croupier.displayTable(table);
                     cout << endl;
                     player.displayHand(table);
-                    cout << "Podaj opcję [Fold/Check/Call/Raise/Bet/All-in]:" << endl << "> ";
+                    cout << "Podaj opcję [Fold/Check/Call/Bet/All-in]:" << endl << "> ";
                     cin >> option;
                     if (option == "Fold") {
                         i->setFold(true);
@@ -105,7 +105,6 @@ void Poker::play() const {
                         break;
                     } if (option == "Call") break;
                     if (option == "Bet") break;
-                    if (option == "Raise") break;
                     if (option == "All-in") {
                         i->setAllIn(true);
                         break;
@@ -126,7 +125,6 @@ void Poker::play() const {
                 check_line.push_back(i);
             } else if (option == "Call") continue;
             else if (option == "Bet") continue;
-            else if (option == "Raise") continue;
             else if (option == "All-in") {
                 i->setAllIn(true);
                 cout << endl << "Gracz " << i->name << " spasował" << endl;
@@ -150,14 +148,13 @@ void Poker::play() const {
                         croupier.displayTable(table);
                         cout << endl;
                         player.displayHand(table);
-                        cout << "Podaj opcję [Fold/Call/Raise/Bet/All-in]:" << endl << "> ";
+                        cout << "Podaj opcję [Fold/Call/Bet/All-in]:" << endl << "> ";
                         cin >> option;
                         if (option == "Fold") {
                             i->setFold(true);
                             break;
                         } if (option == "Call") break;
                         if (option == "Bet") break;
-                        if (option == "Raise") break;
                         if (option == "All-in") {
                             i->setAllIn(true);
                             break;
@@ -175,7 +172,6 @@ void Poker::play() const {
                     sleep();
                 } else if (option == "Call") continue;
                 else if (option == "Bet") continue;
-                else if (option == "Raise") continue;
                 else if (option == "All-in") {
                     i->setAllIn(true);
                     cout << endl << "Gracz " << i->name << " gra va banque" << endl;
@@ -192,7 +188,8 @@ void Poker::play() const {
     cout << endl;
 
     if (player.getFold()) cout << "Gracz " << player.name << " przegrał" << endl;
-    if (line.size() == 1) cout << "Wygrał gracz " << player.name << endl;
-
-    croupier.whoWinsPoker(line, table);
+    else {
+        if (line.size() == 1) cout << "Wygrał gracz " << player.name << endl;
+        else croupier.whoWinsPoker(line, table);
+    }
 }

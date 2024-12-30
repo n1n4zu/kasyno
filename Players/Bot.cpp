@@ -70,12 +70,12 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
             if (isRoyalFlush(values, colors)) {
                 if (number % 2 == 0 && static_cast<int>(number * 5 * allInChance) % 5 == 0) {
                     if (2.5 * allInChance > 1) return "All-in";
-                    return "Raise";
+                    return "Call";
                 }
             } else if (isStraightFlush(values, colors)) {
                 if (number % 2 == 0 && static_cast<int>(number * 4 * allInChance) % 5 == 0) {
                     if (2.0 * allInChance > 1) return "All-in";
-                    return "Raise";
+                    return "Call";
                 }
             } else if (repeated(values, 4)) {
                 if (number % 2 == 0 && static_cast<int>(number * 3 * allInChance) % 5 == 0) {

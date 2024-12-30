@@ -2,6 +2,8 @@
 #define POKER_H
 
 #include <vector>
+#include <string>
+#include "../deck/deck.h"
 
 using namespace std;
 
@@ -22,5 +24,8 @@ bool isStraight(const vector<int>& values);
 
 // Sprawdza czy jest poker
 bool isStraightFlush(const vector<int>& values, vector<int>& colors);
+
+// Pobiera wartość układu kart
+int getHandValue(string hand, vector<Card> cards);
 
 #endif //POKER_H
