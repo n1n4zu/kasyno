@@ -106,47 +106,67 @@ int getHandValue(string hand, vector<Card> cards) {
     if (hand == "Para") {
         int pairRank = 0;
         for (const auto& card : cards) {
-            if (valuesDict[card.value] > pairRank) {
-                pairRank = valuesDict[card.value];
-            }
+            pairRank = max(pairRank, valuesDict[card.value]);
         }
-
-        // Combine the hand rank with the pair rank
         handRank = handRank * 100 + pairRank;
     }
 
-    if (hand == "Strit") {
-
-        int straightRank = 0;
+    if (hand == "Dwie pary") {
+        map<int, int> valueCounts;
         for (const auto& card : cards) {
-            if (valuesDict[card.value] > straightRank) {
-                straightRank = valuesDict[card.value];
-            }
+            valueCounts[valuesDict[card.value]]++;
         }
 
-        // Combine the hand rank with the straight rank
-        handRank = handRank * 100 + straightRank;
+        vector<int> pairs;
+        int kicker = 0;
+        for (const auto& [value, count] : valueCounts) {
+            if (count == 2) pairs.push_back(value);
+            if (count == 1) kicker = max(kicker, value);
+        }
+
+        if (pairs.size() >= 2) {
+            sort(pairs.begin(), pairs.end(), greater<int>());
+            handRank = handRank * 1000 + pairs[0] * 100 + pairs[1] * 10 + kicker;
+        }
     }
 
-    if (hand == "Poker") {
-        int pokerRank = 0;
+    if (hand == "Trójka") {
+        int tripletValue = 0;
         for (const auto& card : cards) {
-            if (valuesDict[card.value] > pokerRank) {
-                pokerRank = valuesDict[card.value];
-            }
+            tripletValue += valuesDict[card.value];
         }
+        handRank = handRank * 10000 + tripletValue;
+    }
 
-        // Combine the hand rank with the poker rank
-        handRank = handRank * 100 + pokerRank;
+    if (hand == "Strit") {
+        int straightRank = 0;
+        for (const auto& card : cards) {
+            straightRank = max(straightRank, valuesDict[card.value]);
+        }
+        handRank = handRank * 100000 + straightRank;
     }
 
     if (hand == "Kolor") {
-        Card lastCard = cards.back();
+        Card highestCard = cards.back();
+        int highestValue = valuesDict[highestCard.value];
+        handRank = handRank * 1000000 + highestValue;
+    }
 
-        int lastCardValue = valuesDict[lastCard.value];
+    if (hand == "Ful") {
+        map<int, int> valueCounts;
+        for (const auto& card : cards) {
+            valueCounts[valuesDict[card.value]]++;
+        }
 
-        // Połącz rangę koloru z wartością ostatniej karty
-        handRank = handRank * 100 + lastCardValue;
+        int threeOfAKindValue = 0, pairValue = 0;
+        for (const auto& [value, count] : valueCounts) {
+            if (count == 3) threeOfAKindValue = value;
+            if (count == 2) pairValue = value;
+        }
+
+        if (threeOfAKindValue && pairValue) {
+            handRank = handRank * 10000000 + threeOfAKindValue * 10 + pairValue;
+        }
     }
 
     if (hand == "Kareta") {
@@ -154,60 +174,19 @@ int getHandValue(string hand, vector<Card> cards) {
         for (const auto& card : cards) {
             karetaValue += valuesDict[card.value];
         }
-
-        // Połącz rangę karety z wartością kart w karecie
-        handRank = handRank * 100 + karetaValue;
+        handRank = handRank * 100000000 + karetaValue;
     }
 
-    if (hand == "Trójka") {
-        int trójkaValue = 0;
+    if (hand == "Poker") {
+        int pokerRank = 0;
         for (const auto& card : cards) {
-            trójkaValue += valuesDict[card.value];
+            pokerRank = max(pokerRank, valuesDict[card.value]);
         }
-
-        // Połącz rangę trójki z wartością kart w trójce
-        handRank = handRank * 100 + trójkaValue;
+        handRank = handRank * 1000000000 + pokerRank;
     }
 
-    if (hand == "Ful") {
-        // Sprawdź czy trójki są takie same
-        int trójkaValue = 0;
-        for (const auto& card : cards) {
-            if (card.value == "3") {
-                trójkaValue = valuesDict[card.value];
-                break;
-            }
-        }
-
-        // Jeśli trójki są takie same, sprawdź pary
-        if (trójkaValue == 0) {
-            int paraValue = 0;
-            for (const auto& card : cards) {
-                if (card.value == "2") {
-                    paraValue = valuesDict[card.value];
-                    break;
-                }
-            }
-
-            handRank = handRank * 100 + paraValue;
-        } else {
-            handRank = handRank * 100 + trójkaValue;
-        }
-    }
-
-    if (hand == "Dwie pary") {
-        vector<int> paraValues;
-        for (const auto& card : cards) {
-            if (card.value == "2" || card.value == "3" || card.value == "4" || card.value == "5" || card.value == "6" || card.value == "7" || card.value == "8" || card.value == "9" || card.value == "10" || card.value == "Walet" || card.value == "Dama" || card.value == "Król" || card.value == "As") {
-                paraValues.push_back(valuesDict[card.value]);
-            }
-        }
-
-        // Posortuj wartości kart w parach
-        sort(paraValues.begin(), paraValues.end());
-
-        // Połącz rangę dwóch par z wartościami kart w parach
-        handRank = handRank * 100 + paraValues[3] * 10 + paraValues[2];
+    if (hand == "Poker królewski") {
+        handRank = handRank * 10000000000;
     }
 
     if (hand == "Wysoka karta") {
@@ -216,11 +195,11 @@ int getHandValue(string hand, vector<Card> cards) {
             cardValues.push_back(valuesDict[card.value]);
         }
 
-        // Posortuj wartości kart w wysokiej karcie
-        sort(cardValues.begin(), cardValues.end());
-
-        // Połącz rangę wysokiej karty z wartościami kart w wysokiej karcie
-        handRank = handRank * 100 + cardValues[4] * 10 + cardValues[3] * 10 + cardValues[2] * 10 + cardValues[1] * 10 + cardValues[0];
+        sort(cardValues.rbegin(), cardValues.rend());
+        handRank = handRank * 10;
+        for (int i = 0; i < min(5, (int)cardValues.size()); ++i) {
+            handRank = handRank * 10 + cardValues[i];
+        }
     }
 
     return handRank;

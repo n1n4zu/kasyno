@@ -24,12 +24,19 @@ void Croupier::giveCards(const array<Card, 52>& talia, Players& player) {
 }
 
 void Croupier::addCard(const array<Card, 52>& talia, Players& player) {
-    int index = randomize(0, 51);
-    if (usedIndexes.find(index) == usedIndexes.end()) {
-        player.deck.push_back(talia[index]); // Dodajemy losową kartę z `talia`
-        usedIndexes.insert(index);    // Dodajemy indeks do zbioru użytych
+    if (usedIndexes.size() == 52) {
+        throw runtime_error("Brak kart w talii!");
     }
+
+    int index;
+    do {
+        index = randomize(0, 51);
+    } while (usedIndexes.find(index) != usedIndexes.end());
+
+    player.deck.push_back(talia[index]);
+    usedIndexes.insert(index);
 }
+
 
 void Croupier::whoWinsBaccarat(Croupier player1, Player player2) {
     if (9 - player1.points < 9 - player2.points) cout << "Wygrał gracz " << player1.name << endl;
@@ -77,18 +84,28 @@ void Croupier::displayTable(const vector<Card>& table) const {
 }
 
 void Croupier::whoWinsPoker(vector<Players*> line, vector<Card>& table) {
-    string winner;
+    vector<string> winners;
     int bestHand = 0;
 
     for (auto * player : line) {
+        vector<Card> combinedCards = player->deck;
+        combinedCards.insert(combinedCards.end(), table.begin(), table.end());
+
         string hand = player->checkCards(table);
-        int handValue = getHandValue(hand, player->deck);
+        int handValue = getHandValue(hand, combinedCards);
 
         if (handValue > bestHand) {
             bestHand = handValue;
-            winner = player->name;
+            winners = {player->name}; // Resetuj listę zwycięzców
+        } else if (handValue == bestHand) {
+            winners.push_back(player->name); // Dodaj gracza do listy zwycięzców
         }
+
     }
 
-    cout << "Wygrał gracz " << winner << endl;
+    cout << "Wygrał gracz: ";
+    for (const auto& winner : winners) {
+        cout << winner << " ";
+    }
+    cout << endl;
 }

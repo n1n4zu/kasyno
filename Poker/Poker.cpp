@@ -53,13 +53,6 @@ void Poker::play() const {
     clear();
 
     while (table.size() < 5) {
-        if (player.getFold()) break;
-
-        line.erase(remove_if(line.begin(), line.end(), [](Players* player) {
-            return player->getFold();
-        }), line.end());
-
-
         if (line.size() == 1) break;
 
         for (auto * i : line) i->setCheck(false);
@@ -179,6 +172,12 @@ void Poker::play() const {
             }
         }
 
+        line.erase(remove_if(line.begin(), line.end(), [](Players* player) {
+            return player->getFold();
+        }), line.end());
+
+        if (player.getFold()) break;
+
         clear();
     }
 
@@ -192,4 +191,12 @@ void Poker::play() const {
         if (line.size() == 1) cout << "Wygrał gracz " << player.name << endl;
         else croupier.whoWinsPoker(line, table);
     }
+
+    bob.displayHand(table);
+    john.displayHand(table);
+    tim.displayHand(table);
+
+    cout << endl;
+    for (auto * i : line) cout << i-> name << " ";
+    cout << endl;
 }

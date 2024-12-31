@@ -115,12 +115,13 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
             }
         }
     } else {
+        // Zwiększenie szans na Call przy wysokiej karcie
         for (int i = 0; i < 10; i++) {
             int number = randomize(1, 10000);
             if (isRoyalFlush(values, colors)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Raise";
+                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Call";
             } else if (isStraightFlush(values, colors)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Raise";
+                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Call";
             } else if (repeated(values, 4)) {
                 if (number % 2 == 0 && static_cast<int>(number * 0.4 * allInChance) % 5 == 0)
                     return "Call";
@@ -141,6 +142,10 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
                     return "Call";
             } else if (repeated(values, 2)) {
                 if (number % 2 == 0 && static_cast<int>(number * 0.1 * allInChance) % 5 == 0)
+                    return "Call";
+            } else if (values.size() >= 2) {
+                // Zwiększona szansa na Call nawet przy wysokiej karcie
+                if (number % 2 == 0 && static_cast<int>(number * 0.05 * allInChance) % 5 == 0)
                     return "Call";
             }
         }
