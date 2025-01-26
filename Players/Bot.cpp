@@ -69,8 +69,7 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
             int number = randomize(1, 10000);
             if (isRoyalFlush(values, colors)) {
                 if (number % 2 == 0 && static_cast<int>(number * 5 * allInChance) % 5 == 0) {
-                    if (2.5 * allInChance > 1) return "All-in";
-                    return "Call";
+                    return "All-in";
                 }
             } else if (isStraightFlush(values, colors)) {
                 if (number % 2 == 0 && static_cast<int>(number * 4 * allInChance) % 5 == 0) {
@@ -117,37 +116,9 @@ string Bot::strategy(const vector<Card>& table, int actual_bet) {
     } else {
         // Zwiększenie szans na Call przy wysokiej karcie
         for (int i = 0; i < 10; i++) {
-            int number = randomize(1, 10000);
-            if (isRoyalFlush(values, colors)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Call";
-            } else if (isStraightFlush(values, colors)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.5 * allInChance) % 5 == 0) return "Call";
-            } else if (repeated(values, 4)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.4 * allInChance) % 5 == 0)
-                    return "Call";
-            } else if (isFull(values)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.35 * allInChance) % 5 == 0)
-                    return "Call";
-            } else if (repeated(colors, 5)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.3 * allInChance) % 5 == 0)
-                    return "Call";
-            } else if (isStraight(values)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.25 * allInChance) % 5 == 0)
-                    return "Call";
-            } else if (repeated(values, 3)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.2 * allInChance) % 5 == 0)
-                    return "Call";
-            } else if (repeatedPairs(values, 2)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.15 * allInChance) % 5 == 0)
-                    return "Call";
-            } else if (repeated(values, 2)) {
-                if (number % 2 == 0 && static_cast<int>(number * 0.1 * allInChance) % 5 == 0)
-                    return "Call";
-            } else if (values.size() >= 2) {
-                // Zwiększona szansa na Call nawet przy wysokiej karcie
+            int number = randomize(1, 10000);// Zwiększona szansa na Call nawet przy wysokiej karcie
                 if (number % 2 == 0 && static_cast<int>(number * 0.05 * allInChance) % 5 == 0)
                     return "Call";
-            }
         }
     }
 

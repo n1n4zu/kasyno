@@ -1,0 +1,40 @@
+Instrukcja do gry Poker
+
+W tej grze gracze rywalizują o zdobycie najlepszego układu kart. Każdy gracz otrzymuje dwie karty zakryte,
+a na stół wykładane są karty wspólne. Gracze mogą obstawiać, sprawdzać lub spasować w kolejnych rundach.
+
++--------------------------+--------------------------------------+
+|          Układ           |                 Opis                 |
++--------------------------+--------------------------------------+
+|     Poker królewski      | 5 kart od 10 do Asa w jednym kolorze |
++--------------------------+--------------------------------------+
+|          Poker           |   5 kart w jednym kolorze, po kolei  |
++--------------------------+--------------------------------------+
+|         Kareta           |      4 karty tej samej wartości      |
++--------------------------+--------------------------------------+
+|          Full            |   3 karty tej samej wartości i para  |
++--------------------------+--------------------------------------+
+|          Kolor           |       5 kart w jednym kolorze        |
++--------------------------+--------------------------------------+
+|         Strit            |    5 kart po kolei, różne kolory     |
++--------------------------+--------------------------------------+
+|         Trójka           |      3 karty tej samej wartości      |
++--------------------------+--------------------------------------+
+|        Dwie pary         |    2 pary kart tej samej wartości    |
++--------------------------+--------------------------------------+
+|           Para           |    2 karty tej samej wartości        |
++--------------------------+--------------------------------------+
+|       Wysoka karta       |  Najwyższa karta, jeśli brak układu  |
++--------------------------+--------------------------------------+
+
+Zasady gry:
+1. Gracze otrzymują po 2 karty zakryte.
+2. Na stół wykładane są karty wspólne: flop (3 karty), turn (4. karta), river (5. karta).
+3. Po każdej rundzie dołożenia kart gracze mogą:
+   - Fold – spasować i wyjść z gry.
+   - Check – czekać, nie dokładając żetonów.
+   - Call – dorównać do najwyższego zakładu.
+   - Bet – postawić zakład.
+   - All-in – postawić wszystkie żetony.
+4. Po ostatniej rundzie obstawiania gracze porównują układy kart.
+5. Wygrywa gracz z najsilniejszym układem. W przypadku remisu pula jest dzielona.

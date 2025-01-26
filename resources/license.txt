@@ -1,0 +1,25 @@
+Ten projekt jest licencjonowany na zasadach dwóch licencji:
+
+- Licencja MIT
+
+  Copyright (c) 2025 Kryspin Dziarek
+
+  Zezwala się na bezpłatne korzystanie, kopiowanie, modyfikowanie, łączenie,
+  publikowanie, rozpowszechnianie, sublicencjonowanie i sprzedaż kopii oprogramowania i
+  powiązanych plików dokumentacji (dalej: "Oprogramowanie"), a także na udzielanie
+  osobom, którym oprogramowanie jest dostarczane, upoważnienia do korzystania z
+  oprogramowania, z zastrzeżeniem następujących warunków:
+
+   Powyższa informacja o prawach autorskich i niniejsza licencja muszą być zawarte we
+   wszystkich kopiach lub znaczących częściach oprogramowania.
+
+  OPRACOWANIE DOSTARCZONE JEST "W STANIE, W JAKIM SIĘ ZNAJDUJE", BEZ JAKIEJKOLWIEK
+  GWARANCJI, WYRAŹNEJ LUB DOROZUMIANEJ, W TYM W SZCZEGÓLNOŚCI GWARANCJI HANDLOWEJ,
+  PRZYDATNOŚCI DO OKREŚLONYCH CELÓW LUB NIE NARUSZANIA PRAW. W ŻADNYM WYPADKU AUTOR
+  LUB POSIADACZE PRAW AUTORSKICH NIE BĘDĄ ODPOWIEDZIALNI ZA ROSZCZENIA, SZKODY LUB INNE
+  ODSZKODOWANIA, WYNIKAJĄCE Z UMOWY, DELIKTU LUB INNEJ PODSTAWY PRAWNEJ, WYNIKAJĄCE Z
+  OPROGRAMOWANIA LUB KORZYSTANIA Z NIEGO LUB INNYCH DZIAŁAŃ Z NIM ZWIĄZANYCH.
+
+- Licencja Beerware – Jeśli uznasz, że projekt ci się podoba, możesz kiedyś postawić mi piwo.
+
+Wybór należy do Ciebie!

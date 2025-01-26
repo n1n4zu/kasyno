@@ -12,10 +12,12 @@ using namespace std;
 
 void Poker::play() const {
     string option;
+    double money = 0;
     array<Card, 52> deck;
     int index = 0;
     vector<Card> table;
-    int actual_bet = 0;
+    double actual_bet = 0;
+    double bet;
 
     for (const auto& color : colors) {
         for (const auto& value : values) {
@@ -65,8 +67,6 @@ void Poker::play() const {
         sleep();
         clear();
 
-        if (table.size() > 2) rotate(line.rbegin(), line.rbegin() + 1, line.rend());
-
         cout << "Gracze: ";
         for (auto * i : line) cout << i->name << " ";
         cout << endl;
@@ -96,14 +96,35 @@ void Poker::play() const {
                         i->setCheck(true);
                         check_line.push_back(i);
                         break;
-                    } if (option == "Call") break;
-                    if (option == "Bet") break;
-                    if (option == "All-in") {
+                    } if (option == "Call") {
+                        bet = actual_bet;
+                        i->setBet(bet);
+                        money += bet;
+                        break;
+                    } if (option == "Bet") {
+                        cout << "Podaj kwotę:" << endl << "> ";
+                        if (bet > actual_bet) {
+                            if (actual_bet == 0) actual_bet = bet;
+                            cin >> bet;
+                            money += bet;
+                            i->setBet(bet);
+                        } else {
+                            cout << "Niepoprawna kwota zakłdadu" << endl;
+                            cout << "Podaj kwotę:" << endl << "> ";
+                            cin >> bet;
+                            money += bet;
+                            i->setBet(bet);
+                        }
+                        break;
+                    } if (option == "All-in") {
                         i->setAllIn(true);
+                        actual_bet = player.getCash();
+                        money += player.getCash();
                         break;
                     }
                     clear();
                 }
+                if (i->getFold() && i->name == player.name) break;
                 continue;
             }
 
@@ -146,14 +167,35 @@ void Poker::play() const {
                         if (option == "Fold") {
                             i->setFold(true);
                             break;
-                        } if (option == "Call") break;
-                        if (option == "Bet") break;
-                        if (option == "All-in") {
+                        } if (option == "Call") {
+                            bet = actual_bet;
+                            i->setBet(bet);
+                            money += bet;
+                            break;
+                        } if (option == "Bet") {
+                            cout << "Podaj kwotę:" << endl << "> ";
+                            if (bet > actual_bet) {
+                                if (actual_bet == 0) actual_bet = bet;
+                                cin >> bet;
+                                money += bet;
+                                i->setBet(bet);
+                            } else {
+                                cout << "Niepoprawna kwota zakłdadu" << endl;
+                                cout << "Podaj kwotę:" << endl << "> ";
+                                cin >> bet;
+                                money += bet;
+                                i->setBet(bet);
+                            }
+                            break;
+                        } if (option == "All-in") {
                             i->setAllIn(true);
+                            actual_bet = player.getCash();
+                            money += player.getCash();
                             break;
                         }
                         clear();
                     }
+                    if (i->getFold() && i->name == player.name) break;
                     continue;
                 }
 
@@ -176,6 +218,8 @@ void Poker::play() const {
             return player->getFold();
         }), line.end());
 
+        if (table.size() > 2) rotate(line.rbegin(), line.rbegin() + 1, line.rend());
+
         if (player.getFold()) break;
 
         clear();
@@ -186,17 +230,13 @@ void Poker::play() const {
     player.displayHand(table);
     cout << endl;
 
-    if (player.getFold()) cout << "Gracz " << player.name << " przegrał" << endl;
-    else {
-        if (line.size() == 1) cout << "Wygrał gracz " << player.name << endl;
-        else croupier.whoWinsPoker(line, table);
+    if (player.getFold()) {
+        cout << "Wygrał gracz " << player.name << endl;
+        player.setCash(player.getCash() + money);
+    } else {
+        if (line.size() == 1) {
+            cout << "Wygrał gracz " << player.name << endl;
+            player.setCash(player.getCash() + money);
+        } else croupier.whoWinsPoker(line, table);
     }
-
-    bob.displayHand(table);
-    john.displayHand(table);
-    tim.displayHand(table);
-
-    cout << endl;
-    for (auto * i : line) cout << i-> name << " ";
-    cout << endl;
 }

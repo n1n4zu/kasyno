@@ -1,0 +1,3 @@
+Instrukcja do gry Jednoręki bandyta
+
+Gracz ciągnie za wajchę i jeśli wypadną 3 takie same liczby to wygrywa.

@@ -1,0 +1,19 @@
+Instrukcja do gry Bakarat
+
+W tej grze gracz musi zbliżyć warotość swoich kart do liczby 9.
+Gracz dostaje dwie karty i może dobrać jeszcze jedną.
+
++--------------------------+-----------------------------------+
+|          Karta           |              Wartość              |
++--------------------------+-----------------------------------+
+|    Król, dama, walet     |                 0                 |
++--------------------------+-----------------------------------+
+|           10             |                 0                 |
++--------------------------+-----------------------------------+
+|         2 do 9           | Wartość zgodna z liczbą na karcie |
++--------------------------+-----------------------------------+
+|           As             |                 1                 |
++--------------------------+-----------------------------------+
+
+Jeśli suma kart przekracza liczbę 9 to odejmujemy liczbę 10 z sumy kart.
+Wygrywa gracz, którego wynik jest bliżej liczby 9.

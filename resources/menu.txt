@@ -1,0 +1,9 @@
+Wybierz grę
+[1] Bakarat
+[2] Kości
+[3] Blackjack
+[4] Poker
+[5] Jednoręki bandyta
+[6] Instrukcja
+[7] Licencja
+[8] Wyjdź

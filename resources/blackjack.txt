@@ -1,0 +1,31 @@
+Instrukcja do gry Blackjack
+
+Celem gry jest osiągnięcie liczby 21.
+Gracz dostaje na start dwie karty i musi dobierać karty tak by zbliżyć się do
+liczby 21 jednocześnie nieprzekraczając jej.
+Jeśli gracz przekroczy liczbę 21 to przegrywa.
+Jeśli gracz za pomocą dwóch kart osiągnie wynik 21 to ma blackjack'a i
+dostaje 150% zakładu.
+
++-----------------------+-------------------------------------------------+
+|         Karty         |                     Wartość                     |
++-----------------------+-------------------------------------------------+
+| Król, dama, walet, 10 |                       10                        |
++-----------------------+-------------------------------------------------+
+|         2 do 9        |         Wartość równa wartości na karcie        |
++-----------------------+-------------------------------------------------+
+|          As           | 1 lub 11 w zależności co jest lepsze dla gracza |
++-----------------------+-------------------------------------------------+
+
+Jeśli krupier jako pierwszą kartę ma asa to gracz może ubezpieczyć swój zakład.
+Jeśli krupier ma blackjack'a to zabiera zakład gracza ale zostawia ubezpieczenie.
+Jeśli krupier nie ma blackjack'a, a gracz ubezpieczył zakład to krupier zabiera
+ubezpieczenie.
+
+Komendy używane w Blackjack'u:
+Hit - dobierz kartę
+Stand - czeka na koniec gry
+Double - gracz dobiera jedną kartę i podwaja zakła (dostępne jeśli gracz wcześniej
+nie dobierał kart i blokuje możliwość dobierania kolejnych kart)
+
+Jest to wersja Blackjack'a bez splita, czyli bez grania na dwie ręce.

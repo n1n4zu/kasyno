@@ -1,0 +1,4 @@
+Instrukcja do gry Kości
+
+Gracz musi zgadnąć wartości dwóch kości, którymi rzuca krupier.
+Jeśli gracz zganie obie wartości to wygrywa, w przeciwnym przypadku przegrywa.

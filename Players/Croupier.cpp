@@ -103,9 +103,5 @@ void Croupier::whoWinsPoker(vector<Players*> line, vector<Card>& table) {
 
     }
 
-    cout << "Wygrał gracz: ";
-    for (const auto& winner : winners) {
-        cout << winner << " ";
-    }
-    cout << endl;
+    winners.size() == 1 ? cout << "Wygrał gracz: " << winners[0] << endl : cout << "Remis" << endl;
 }

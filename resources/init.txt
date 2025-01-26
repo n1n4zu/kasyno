@@ -1,0 +1,3 @@
+Witaj w kasynie
+[1] Zacznij grę
+[2] Wyjdź

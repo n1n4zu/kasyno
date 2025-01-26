@@ -1,0 +1,7 @@
+Instrukcje do gier w kasynie
+[1] Bakrat
+[2] Kości
+[3] Blackjack
+[4] Poker
+[5] Jednoręki bandyta
+[6] Wstecz
