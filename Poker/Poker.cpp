@@ -11,6 +11,9 @@
 using namespace std;
 
 void Poker::play() const {
+    reset();
+    croupier.clearUsedIndexes();
+
     string option;
     double money = 0;
     array<Card, 52> deck;
@@ -239,4 +242,23 @@ void Poker::play() const {
             player.setCash(player.getCash() + money);
         } else croupier.whoWinsPoker(line, table);
     }
+}
+
+void Poker::reset() const {
+    player.deck.clear();
+    bob.deck.clear();
+    john.deck.clear();
+    tim.deck.clear();
+    player.setFold(false);
+    bob.setFold(false);
+    john.setFold(false);
+    tim.setFold(false);
+    player.setAllIn(false);
+    bob.setAllIn(false);
+    john.setAllIn(false);
+    tim.setAllIn(false);
+    player.setCheck(false);
+    bob.setCheck(false);
+    john.setCheck(false);
+    tim.setCheck(false);
 }

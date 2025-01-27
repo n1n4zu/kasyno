@@ -6,6 +6,14 @@
 using namespace std;
 
 void Baccarat::play() {
+    reset();
+    croupier.clearUsedIndexes();
+
+    // Tworzenie talii
+    double betAmount;
+    cout << "Podaj kwotę zakładu: ";
+    cin >> betAmount;
+    player.placeBet(betAmount);
 
     // Tworzenie talii
     array<Card, 52> deck;
@@ -71,4 +79,15 @@ void Baccarat::play() {
 
     // Krupier sprawdza i informuje kto wygrał
     croupier.whoWinsBlackjack(croupier, player);
+
+    cout << endl << "Wciśnij Enter by kontynuować";
+    cin.ignore();
+    cin.get();
+}
+
+void Baccarat::reset() {
+    player.deck.clear();
+    croupier.deck.clear();
+    player.points = 0;
+    croupier.points = 0;
 }

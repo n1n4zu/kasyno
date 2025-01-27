@@ -20,6 +20,8 @@ void Menu::introductionMenu() {
 void Menu::mainMenu() {
     menu.open("../resources/menu.txt", ios::in);
 
+    cout << "Imię: " << player.getName() << " Pieniądze: " << player.getCash() << endl;
+
     string line;
 
     while (!menu.eof()) {

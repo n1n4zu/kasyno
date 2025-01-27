@@ -7,45 +7,128 @@
 #include "Craps/Craps.h"
 #include "Poker/Poker.h"
 #include "Menu/Menu.h"
-#include <unistd.h>
+#include <iostream>
+#include "functions/functions.h"
 
 using namespace std;
 
-int main()
-{
+int main() {
+    string name;
     Croupier croupier("Krupier");
-    Player player("Kryspin");
+
+    cout << "Podaj swoje imię: " << endl << "> ";
+    cin >> name;
+
+    Player player(name);
+
     Bot bob("Bob", 0.25);
     Bot john("John", 0.5);
     Bot tim("Tim", 0.8);
-    OneHandedBandit fruitMachine;
+    OneHandedBandit fruitMachine(player);
     Baccarat baccarat(player, croupier);
-    Craps craps;
+    Craps craps(player);
     Blackjack blackjack(player, croupier);
     Poker poker(player, croupier, bob, john, tim);
-    Menu menu;
+    Menu menu(player);
+    int option;
 
-    // menu.introductionMenu();
-    // menu.mainMenu();
-    // menu.instructionMenu();
-    // menu.licenseMenu();
-    // menu.baccaratInstruction();
-    // menu.blackjackInstruction();
-    // menu.crapsInstruction();
-    // menu.pokerInstruction();
-    // menu.oneHandedBanditInstruction();
+    clear();
 
-    // sleep(10);
+    menu.introductionMenu();
 
-    // fruitMachine.play();
+    cout << "> ";
+    cin >> option;
 
-    // baccarat.play();
+    if (option == 1) {
+        clear();
 
-    // craps.play();
+        while (true) {
+            bool testValue = true;
 
-    // blackjack.play();
+            clear();
 
-    // poker.play();
+            menu.mainMenu();
+
+            cout << "> ";
+            cin >> option;
+
+            clear();
+
+            switch (option) {
+                case 1:
+                    baccarat.play();
+                break;
+                case 2:
+                    craps.play();
+                break;
+                case 3:
+                    blackjack.play();
+                break;
+                case 4:
+                    poker.play();
+                break;
+                case 5:
+                    fruitMachine.play();
+                break;
+                case 6:
+                    while (testValue) {
+                        clear();
+                        menu.instructionMenu();
+                        cout << "> ";
+                        cin >> option;
+                        clear();
+                        switch (option) {
+                            case 1:
+                                menu.baccaratInstruction();
+                                cout << endl << "Wciśnij Enter by kontynuować";
+                                cin.ignore();
+                                cin.get();
+                            break;
+                            case 2:
+                                menu.crapsInstruction();
+                                cout << endl << "Wciśnij Enter by kontynuować";
+                                cin.ignore();
+                                cin.get();
+                            break;
+                            case 3:
+                                menu.blackjackInstruction();
+                                cout << endl << "Wciśnij Enter by kontynuować";
+                                cin.ignore();
+                                cin.get();
+                            break;
+                            case 4:
+                                menu.pokerInstruction();
+                                cout << endl << "Wciśnij Enter by kontynuować";
+                                cin.ignore();
+                                cin.get();
+                            break;
+                            case 5:
+                                menu.oneHandedBanditInstruction();
+                                cout << endl << "Wciśnij Enter by kontynuować";
+                                cin.ignore();
+                                cin.get();
+                            break;
+                            case 6:
+                                testValue = false;
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                break;
+                case 7:
+                    menu.licenseMenu();
+                    cout << endl << "Wciśnij Enter by kontynuować";
+                    cin.ignore();
+                    cin.get();
+                break;
+                case 8:
+                    return false;
+                default:
+                break;
+            }
+        }
+    }
 
     return 0;
 }

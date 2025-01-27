@@ -8,6 +8,7 @@ using namespace std;
 class Baccarat {
     Player& player;
     Croupier& croupier;
+    void reset();
 
     public:
     Baccarat(Player& player, Croupier& croupier) : player(player), croupier(croupier) {};

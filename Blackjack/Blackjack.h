@@ -7,6 +7,7 @@
 class Blackjack {
     Player& player;
     Croupier& croupier;
+    void reset() const;
 
     public:
     Blackjack(Player& player, Croupier& croupier) : player(player), croupier(croupier) {}

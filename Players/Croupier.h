@@ -37,6 +37,9 @@ public:
 
     // Sprawdza kto wygrał
     void whoWinsPoker(vector<Players*> line, vector<Card>& table);
+
+    // Czyszczenie użytych kart
+    void clearUsedIndexes();
 };
 
 #endif //CROUPIER_H

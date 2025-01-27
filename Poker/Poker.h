@@ -11,6 +11,7 @@ class Poker {
     Bot& bob;
     Bot& john;
     Bot& tim;
+    void reset() const;
 
 public:
     Poker(Player& player, Croupier& croupier, Bot& bob, Bot& john, Bot& tim) : player(player), croupier(croupier), bob(bob), john(john), tim(tim) {}

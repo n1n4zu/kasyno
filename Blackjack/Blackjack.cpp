@@ -7,6 +7,9 @@
 using namespace std;
 
 void Blackjack::play() const {
+    reset();
+    croupier.clearUsedIndexes();
+
     string option;
     array<Card, 52> deck;
     int index = 0;
@@ -220,4 +223,17 @@ void Blackjack::play() const {
         croupier.whoWinsBlackjack(croupier, player);
         break;
     }
+
+    cout << endl << "Wciśnij Enter by kontynuować";
+    cin.ignore();
+    cin.get();
+}
+
+void Blackjack::reset() const {
+    player.deck.clear();
+    croupier.deck.clear();
+    player.points = 0;
+    croupier.points = 0;
+    player.setInsurance(false);
+    player.setInsuranceValue(0);
 }

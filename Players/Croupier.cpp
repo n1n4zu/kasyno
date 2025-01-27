@@ -39,12 +39,21 @@ void Croupier::addCard(const array<Card, 52>& talia, Players& player) {
 
 
 void Croupier::whoWinsBaccarat(Croupier player1, Player player2) {
-    if (9 - player1.points < 9 - player2.points) cout << "Wygrał gracz " << player1.name << endl;
-    else if (9 - player1.points > 9 - player2.points) cout << "Wygrał gracz " << player2.name << endl;
-    else if (9 - player1.points ==  9 - player2.points) {
-        if (player1.deck.size() == player2.deck.size()) cout << "Remis" << endl;
-        else if (player1.deck.size() < player2.deck.size()) cout << "Wygrał gracz " << player1.name << endl;
-        else cout << "Wygrał gracz " << player2.name << endl;
+    if (9 - player1.points < 9 - player2.points) {
+        cout << "Wygrał gracz " << player1.name << endl;
+    } else if (9 - player1.points > 9 - player2.points) {
+        cout << "Wygrał gracz " << player2.name << endl;
+        player2.winBet(1); // Gracz wygrywa zakład 1:1
+    } else if (9 - player1.points == 9 - player2.points) {
+        if (player1.deck.size() == player2.deck.size()) {
+            cout << "Remis" << endl;
+            player2.setCash(player2.getCash() + player2.getBet()); // Zwrot zakładu w przypadku remisu
+        } else if (player1.deck.size() < player2.deck.size()) {
+            cout << "Wygrał gracz " << player1.name << endl;
+        } else {
+            cout << "Wygrał gracz " << player2.name << endl;
+            player2.winBet(1); // Gracz wygrywa zakład 1:1
+        }
     }
 }
 
@@ -105,3 +114,8 @@ void Croupier::whoWinsPoker(vector<Players*> line, vector<Card>& table) {
 
     winners.size() == 1 ? cout << "Wygrał gracz: " << winners[0] << endl : cout << "Remis" << endl;
 }
+
+void Croupier::clearUsedIndexes() {
+    usedIndexes.clear();
+}
+
