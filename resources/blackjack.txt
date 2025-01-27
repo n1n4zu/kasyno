@@ -25,7 +25,7 @@ ubezpieczenie.
 Komendy używane w Blackjack'u:
 Hit - dobierz kartę
 Stand - czeka na koniec gry
-Double - gracz dobiera jedną kartę i podwaja zakła (dostępne jeśli gracz wcześniej
+Double - gracz dobiera jedną kartę i podwaja zakład (dostępne jeśli gracz wcześniej
 nie dobierał kart i blokuje możliwość dobierania kolejnych kart)
 
 Jest to wersja Blackjack'a bez splita, czyli bez grania na dwie ręce.
